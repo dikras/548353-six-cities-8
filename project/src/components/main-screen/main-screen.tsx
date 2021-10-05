@@ -1,4 +1,4 @@
-import Offer from '../offer/offer';
+import OfferScreen from '../offer-screen/offer-screen';
 
 type MainScreenProps = {
   offersCount: number;
@@ -94,11 +94,11 @@ function MainScreen({ offersCount }: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <Offer />
-                <Offer />
-                <Offer />
-                <Offer />
-                <Offer />
+                <OfferScreen />
+                <OfferScreen />
+                <OfferScreen />
+                <OfferScreen />
+                <OfferScreen />
               </div>
             </section>
             <div className="cities__right-section">
