@@ -1,22 +1,31 @@
+/* eslint-disable no-console */
 import { OfferType } from '../../types/offer';
 import { Link } from 'react-router-dom';
 
 type OfferProps = {
   offer: OfferType;
+  isActive: boolean;
+  onMouseOver: () => void;
+  onMouseLeave: () => void;
 };
 
 function Offer(props: OfferProps): JSX.Element {
-  const { offer } = props;
+  const { offer, isActive } = props;
   const { isFavorite, isPremium, previewImage, price, title, type } = offer;
 
   return (
-    <article className="cities__place-card place-card">
+    <article
+      className="cities__place-card place-card"
+      onMouseOver={props.onMouseOver}
+      onMouseLeave={props.onMouseLeave}
+      {...isActive}
+    >
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to={`/offer/:${offer.id}`} title="/offer/:id">
+        <Link to={`/offer/${offer.id}`} title="/offer/id">
           <img className="place-card__image" src={ previewImage } width="260" height="200" alt="Place image" />
         </Link>
       </div>
@@ -40,7 +49,7 @@ function Offer(props: OfferProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/:${offer.id}`} title="/offer/:id">{ title }</Link>
+          <Link to={`/offer/${offer.id}`} title="/offer/id">{ title }</Link>
         </h2>
         <p className="place-card__type">{ type }</p>
       </div>

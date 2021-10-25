@@ -1,7 +1,8 @@
-import {useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 function CommentForm(): JSX.Element {
-  const [userComment, setUserComment] = useState({comment: '', rating: 0});
+  const [userComment, setUserComment] = useState({comment: ''});
+  const [userRating, setUserRating] = useState({rating: 0});
 
   const handleCommentFieldChange = ({target}: ChangeEvent<HTMLTextAreaElement>) => {
     const value = target.value;
@@ -16,9 +17,9 @@ function CommentForm(): JSX.Element {
 
   const handleRatingChange = ({target}: ChangeEvent<HTMLInputElement>) => {
     const value = target.value;
-    setUserComment(Object.assign(
+    setUserRating(Object.assign(
       {},
-      userComment,
+      userRating,
       {
         rating: value,
       },

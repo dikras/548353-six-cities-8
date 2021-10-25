@@ -1,17 +1,22 @@
+/* eslint-disable no-console */
 import Logo from '../logo/logo';
-import { OfferType } from '../../types/offer';
-import { ReviewsType } from '../../types/review';
-import { Link } from 'react-router-dom';
+import { OffersType, OfferType } from '../../types/offer';
+import {ReviewsType} from '../../types/review';
+import { Link, useParams } from 'react-router-dom';
 import Review from '../review/review';
 import CommentForm from '../comment-form/comment-form';
 
 type RoomProps = {
-  offer: OfferType;
+  offers: OffersType;
   reviews: ReviewsType;
 };
 
 function RoomScreen(props: RoomProps): JSX.Element {
-  const { offer, reviews } = props;
+  const { offers, reviews } = props;
+
+  const { id } = useParams<{ id: string }>();
+  const currentOffer = offers.find((offer) => offer.id.toString() === id) as OfferType;
+
   const {
     title,
     images,
@@ -24,7 +29,7 @@ function RoomScreen(props: RoomProps): JSX.Element {
     goods,
     host,
     description,
-  } = offer;
+  } = currentOffer;
 
   return (
     <div className="page">
@@ -53,8 +58,8 @@ function RoomScreen(props: RoomProps): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((image, id) => {
-                const keyValue = `${id}-${image}`;
+              {images.map((image, index) => {
+                const keyValue = `${index}-${image}`;
                 return (
                   <div key={keyValue} className="property__image-wrapper">
                     <img className="property__image" src={image} alt="Photo studio" />
@@ -105,8 +110,8 @@ function RoomScreen(props: RoomProps): JSX.Element {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {goods.map((good, id) => {
-                    const keyValue = `${id}-${good}`;
+                  {goods.map((good, index) => {
+                    const keyValue = `${index}-${good}`;
                     return (
                       <li key={keyValue} className="property__inside-item">
                         { good }
