@@ -16,9 +16,10 @@ type AppScreenProps = {
   reviews: ReviewsType;
   city: City;
   points: Points;
+  cities: string[];
 }
 
-function App({ offersCount, offers, reviews, city, points }: AppScreenProps): JSX.Element {
+function App({ offersCount, offers, reviews, city, points, cities }: AppScreenProps): JSX.Element {
 
   return (
     <BrowserRouter>
@@ -29,6 +30,7 @@ function App({ offersCount, offers, reviews, city, points }: AppScreenProps): JS
             offers = {offers}
             city = {city}
             points={points}
+            cities={cities}
           />
         </Route>
         <Route exact path={ AppRoute.SignIn }>
