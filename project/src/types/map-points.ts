@@ -1,6 +1,6 @@
 export type City = {
-  lat: number;
-  lng: number;
+  latitude: number;
+  longitude: number;
   zoom: number;
 };
 

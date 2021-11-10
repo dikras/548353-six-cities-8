@@ -26,16 +26,14 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function MainScreen(props: PropsFromRedux): JSX.Element {
-  // debugger;
   const { currentCity, offers, onCityClick } = props;
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity);
   const [firstCity] = cityOffers;
   const cityLocation = firstCity.city.location;
-  console.log(cityLocation);
   const cityPoints = cityOffers.map((offer) => (
     {
-      lat: offer.location.lat,
-      lng: offer.location.lng,
+      lat: offer.location.latitude,
+      lng: offer.location.longitude,
     }
   ));
 
