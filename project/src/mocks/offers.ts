@@ -5,8 +5,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        lat: 52.370216,
+        lng: 4.895168,
         zoom: 10,
       },
       name: 'Amsterdam',
@@ -29,8 +29,8 @@ export const offers: OffersType = [
     isFavorite: false,
     isPremium: true,
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      lat: 52.3909553943508,
+      lng: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 4,
@@ -44,8 +44,8 @@ export const offers: OffersType = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        lat: 52.370216,
+        lng: 4.895168,
         zoom: 10,
       },
       name: 'Amsterdam',
@@ -63,8 +63,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 52.369553943508,
-      longitude: 4.85309666406198,
+      lat: 52.369553943508,
+      lng: 4.85309666406198,
       zoom: 8,
     },
     maxAdults: 2,
@@ -78,8 +78,8 @@ export const offers: OffersType = [
     bedrooms: 2,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        lat: 52.370216,
+        lng: 4.895168,
         zoom: 10,
       },
       name: 'Amsterdam',
@@ -97,8 +97,8 @@ export const offers: OffersType = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.929309666406198,
+      lat: 52.3909553943508,
+      lng: 4.929309666406198,
       zoom: 8,
     },
     maxAdults: 2,
@@ -112,8 +112,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        lat: 52.370216,
+        lng: 4.895168,
         zoom: 10,
       },
       name: 'Amsterdam',
@@ -131,8 +131,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      lat: 52.3809553943508,
+      lng: 4.939309666406198,
       zoom: 8,
     },
     maxAdults: 4,
@@ -146,8 +146,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 50.941591,
-        longitude: 6.957785,
+        lat: 50.941591,
+        lng: 6.957785,
         zoom: 10,
       },
       name: 'Cologne',
@@ -170,8 +170,8 @@ export const offers: OffersType = [
     isFavorite: false,
     isPremium: true,
     location: {
-      latitude: 50.947076278494436,
-      longitude: 6.951974108811298,
+      lat: 50.947076278494436,
+      lng: 6.951974108811298,
       zoom: 8,
     },
     maxAdults: 4,
@@ -185,8 +185,8 @@ export const offers: OffersType = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 50.941591,
-        longitude: 6.957785,
+        lat: 50.941591,
+        lng: 6.957785,
         zoom: 10,
       },
       name: 'Cologne',
@@ -204,8 +204,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 50.93351551902674,
-      longitude: 6.95643962922983,
+      lat: 50.93351551902674,
+      lng: 6.95643962922983,
       zoom: 8,
     },
     maxAdults: 2,
@@ -219,8 +219,8 @@ export const offers: OffersType = [
     bedrooms: 2,
     city: {
       location: {
-        latitude: 50.941591,
-        longitude: 6.957785,
+        lat: 50.941591,
+        lng: 6.957785,
         zoom: 10,
       },
       name: 'Cologne',
@@ -238,8 +238,8 @@ export const offers: OffersType = [
     isFavorite: false,
     isPremium: false,
     location: {
-      latitude: 50.94460002283275,
-      longitude: 6.97932703309801,
+      lat: 50.94460002283275,
+      lng: 6.97932703309801,
       zoom: 8,
     },
     maxAdults: 2,
@@ -253,8 +253,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 50.941591,
-        longitude: 6.957785,
+        lat: 50.941591,
+        lng: 6.957785,
         zoom: 10,
       },
       name: 'Cologne',
@@ -272,8 +272,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 50.94307019220841,
-      longitude: 6.942686500755987,
+      lat: 50.94307019220841,
+      lng: 6.942686500755987,
       zoom: 8,
     },
     maxAdults: 4,
@@ -287,8 +287,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 50.847332,
-        longitude: 4.351188,
+        lat: 50.847332,
+        lng: 4.351188,
         zoom: 10,
       },
       name: 'Brussels',
@@ -306,8 +306,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 50.86059085962315,
-      longitude: 4.369593144667165,
+      lat: 50.86059085962315,
+      lng: 4.369593144667165,
       zoom: 8,
     },
     maxAdults: 4,
@@ -321,8 +321,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 50.847332,
-        longitude: 4.351188,
+        lat: 50.847332,
+        lng: 4.351188,
         zoom: 10,
       },
       name: 'Brussels',
@@ -340,8 +340,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 50.85283250038857,
-      longitude: 4.3343695756643275,
+      lat: 50.85283250038857,
+      lng: 4.3343695756643275,
       zoom: 8,
     },
     maxAdults: 4,
@@ -355,8 +355,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 50.847332,
-        longitude: 4.351188,
+        lat: 50.847332,
+        lng: 4.351188,
         zoom: 10,
       },
       name: 'Brussels',
@@ -374,8 +374,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 50.84494872759266,
-      longitude: 4.3438839726668546,
+      lat: 50.84494872759266,
+      lng: 4.3438839726668546,
       zoom: 8,
     },
     maxAdults: 4,
@@ -389,8 +389,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 50.847332,
-        longitude: 4.351188,
+        lat: 50.847332,
+        lng: 4.351188,
         zoom: 10,
       },
       name: 'Brussels',
@@ -408,8 +408,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 50.84764787973303,
-      longitude: 4.361658346405482,
+      lat: 50.84764787973303,
+      lng: 4.361658346405482,
       zoom: 8,
     },
     maxAdults: 4,
@@ -423,8 +423,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 48.858000,
-        longitude: 2.351727,
+        lat: 48.858000,
+        lng: 2.351727,
         zoom: 10,
       },
       name: 'Paris',
@@ -442,8 +442,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 48.86523100081586,
-      longitude: 2.36857029802867,
+      lat: 48.86523100081586,
+      lng: 2.36857029802867,
       zoom: 8,
     },
     maxAdults: 4,
@@ -457,8 +457,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 48.858000,
-        longitude: 2.351727,
+        lat: 48.858000,
+        lng: 2.351727,
         zoom: 10,
       },
       name: 'Paris',
@@ -476,8 +476,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 48.85706076332401,
-      longitude: 2.3316936956654546,
+      lat: 48.85706076332401,
+      lng: 2.3316936956654546,
       zoom: 8,
     },
     maxAdults: 4,
@@ -491,8 +491,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 48.858000,
-        longitude: 2.351727,
+        lat: 48.858000,
+        lng: 2.351727,
         zoom: 10,
       },
       name: 'Paris',
@@ -510,8 +510,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 48.87006581925838,
-      longitude: 2.3389169476747442,
+      lat: 48.87006581925838,
+      lng: 2.3389169476747442,
       zoom: 8,
     },
     maxAdults: 4,
@@ -525,8 +525,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 48.858000,
-        longitude: 2.351727,
+        lat: 48.858000,
+        lng: 2.351727,
         zoom: 10,
       },
       name: 'Paris',
@@ -544,8 +544,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 48.88098412117886,
-      longitude: 2.3475341605981073,
+      lat: 48.88098412117886,
+      lng: 2.3475341605981073,
       zoom: 8,
     },
     maxAdults: 4,
@@ -559,8 +559,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 53.552771,
-        longitude: 9.999611,
+        lat: 53.552771,
+        lng: 9.999611,
         zoom: 10,
       },
       name: 'Hamburg',
@@ -578,8 +578,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 53.55564360761462,
-      longitude: 9.983575123832521,
+      lat: 53.55564360761462,
+      lng: 9.983575123832521,
       zoom: 8,
     },
     maxAdults: 4,
@@ -593,8 +593,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 53.552771,
-        longitude: 9.999611,
+        lat: 53.552771,
+        lng: 9.999611,
         zoom: 10,
       },
       name: 'Hamburg',
@@ -612,8 +612,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 53.55063879620597,
-      longitude: 9.976411951073738,
+      lat: 53.55063879620597,
+      lng: 9.976411951073738,
       zoom: 8,
     },
     maxAdults: 4,
@@ -627,8 +627,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 53.552771,
-        longitude: 9.999611,
+        lat: 53.552771,
+        lng: 9.999611,
         zoom: 10,
       },
       name: 'Hamburg',
@@ -646,8 +646,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 53.548522780702704,
-      longitude: 10.018186136289012,
+      lat: 53.548522780702704,
+      lng: 10.018186136289012,
       zoom: 8,
     },
     maxAdults: 4,
@@ -661,8 +661,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 53.552771,
-        longitude: 9.999611,
+        lat: 53.552771,
+        lng: 9.999611,
         zoom: 10,
       },
       name: 'Hamburg',
@@ -680,8 +680,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 53.57158615203905,
-      longitude: 9.981187560695231,
+      lat: 53.57158615203905,
+      lng: 9.981187560695231,
       zoom: 8,
     },
     maxAdults: 4,
@@ -695,8 +695,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 51.226319,
-        longitude: 6.773335,
+        lat: 51.226319,
+        lng: 6.773335,
         zoom: 10,
       },
       name: 'Dusseldorf',
@@ -714,8 +714,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 51.226157924948446,
-      longitude: 6.790244196425656,
+      lat: 51.226157924948446,
+      lng: 6.790244196425656,
       zoom: 8,
     },
     maxAdults: 4,
@@ -729,8 +729,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 51.226319,
-        longitude: 6.773335,
+        lat: 51.226319,
+        lng: 6.773335,
         zoom: 10,
       },
       name: 'Dusseldorf',
@@ -748,8 +748,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 51.23310970326325,
-      longitude: 6.755562274950694,
+      lat: 51.23310970326325,
+      lng: 6.755562274950694,
       zoom: 8,
     },
     maxAdults: 4,
@@ -763,8 +763,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 51.226319,
-        longitude: 6.773335,
+        lat: 51.226319,
+        lng: 6.773335,
         zoom: 10,
       },
       name: 'Dusseldorf',
@@ -782,8 +782,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 51.25027859324032,
-      longitude: 6.7816400679559665,
+      lat: 51.25027859324032,
+      lng: 6.7816400679559665,
       zoom: 8,
     },
     maxAdults: 4,
@@ -797,8 +797,8 @@ export const offers: OffersType = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 51.226319,
-        longitude: 6.773335,
+        lat: 51.226319,
+        lng: 6.773335,
         zoom: 10,
       },
       name: 'Dusseldorf',
@@ -816,8 +816,8 @@ export const offers: OffersType = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 51.21144754381494,
-      longitude: 6.778674846753495,
+      lat: 51.21144754381494,
+      lng: 6.778674846753495,
       zoom: 8,
     },
     maxAdults: 4,

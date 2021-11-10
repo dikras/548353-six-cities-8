@@ -8,11 +8,14 @@ import App from './components/app/app';
 import { reducer } from './store/reducer';
 import { offers } from './mocks/offers';
 import { reviews } from './mocks/reviews';
+import { createOffersList } from './store/action';
 
 const store = createStore(
   reducer,
   composeWithDevTools(),
 );
+
+store.dispatch(createOffersList(offers));
 
 ReactDOM.render(
   <React.StrictMode>
