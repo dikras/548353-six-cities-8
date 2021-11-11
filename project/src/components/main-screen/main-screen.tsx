@@ -1,17 +1,41 @@
+/* eslint-disable no-console */
+/* eslint-disable no-debugger */
 import OffersList from '../offer-list/offer-list';
-import { OffersType } from '../../types/offer';
 import Map from '../map/map';
-import { City, Points } from '../../types/map-points';
+import LocationsList from '../locations-list/locations-list';
+import {Dispatch} from 'redux';
+import {connect, ConnectedProps} from 'react-redux';
+import {State} from '../../types/state';
+import {Actions} from '../../types/action';
+import { changeCity } from '../../store/action';
+import { CityName } from '../../const';
 
-type MainScreenProps = {
-  offersCount: number;
-  offers: OffersType;
-  city: City;
-  points: Points;
-}
+const mapStateToProps = ({currentCity, offers}: State) => ({
+  currentCity,
+  offers,
+});
 
-function MainScreen(props: MainScreenProps): JSX.Element {
-  const { offersCount, offers, city, points } = props;
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+  onCityClick(city: CityName) {
+    dispatch(changeCity(city));
+  },
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function MainScreen(props: PropsFromRedux): JSX.Element {
+  const { currentCity, offers, onCityClick } = props;
+  const cityOffers = offers.filter((offer) => offer.city.name === currentCity);
+  const [firstCity] = cityOffers;
+  const cityLocation = firstCity.city.location;
+  const cityPoints = cityOffers.map((offer) => (
+    {
+      lat: offer.location.latitude,
+      lng: offer.location.longitude,
+    }
+  ));
 
   return (
     <div className="page page--gray page--main">
@@ -47,45 +71,14 @@ function MainScreen(props: MainScreenProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <LocationsList currentCity={currentCity} onCityClick={onCityClick} />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{ offersCount } places to stay in Amsterdam</b>
+              <b className="places__found">{cityOffers.length} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -101,11 +94,11 @@ function MainScreen(props: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OffersList offers={offers} />
+              <OffersList offers={cityOffers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={city} points={points} />
+                <Map city={cityLocation} points={cityPoints} />
               </section>
             </div>
           </div>
@@ -115,4 +108,5 @@ function MainScreen(props: MainScreenProps): JSX.Element {
   );
 }
 
-export default MainScreen;
+export {MainScreen};
+export default connector(MainScreen);

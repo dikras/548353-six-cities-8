@@ -8,28 +8,19 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import { OffersType } from '../../types/offer';
 import { ReviewsType } from '../../types/review';
-import { City, Points } from '../../types/map-points';
 
 type AppScreenProps = {
-  offersCount: number;
   offers: OffersType;
   reviews: ReviewsType;
-  city: City;
-  points: Points;
 }
 
-function App({ offersCount, offers, reviews, city, points }: AppScreenProps): JSX.Element {
+function App({ offers, reviews }: AppScreenProps): JSX.Element {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={ AppRoute.Main }>
-          <MainScreen
-            offersCount = {offersCount}
-            offers = {offers}
-            city = {city}
-            points={points}
-          />
+          <MainScreen />
         </Route>
         <Route exact path={ AppRoute.SignIn }>
           <SignInScreen />
