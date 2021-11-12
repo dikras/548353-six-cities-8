@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-debugger */
+import { useState } from 'react';
 import OffersList from '../offer-list/offer-list';
 import Map from '../map/map';
 import LocationsList from '../locations-list/locations-list';
@@ -10,6 +11,7 @@ import {Actions} from '../../types/action';
 import { changeCity } from '../../store/action';
 import { CityName, SortingType } from '../../const';
 import SortingForm from '../sorting-form/sorting-form';
+import { OfferType } from '../../types/offer';
 
 const mapStateToProps = ({currentCity, offers, currentSortingOption}: State) => ({
   currentCity,
@@ -28,6 +30,17 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function MainScreen(props: PropsFromRedux): JSX.Element {
+  const [selectedCard, setSelectedCard] = useState<OfferType | undefined>(undefined);
+
+  const onOfferCardHover = (offerId: number) => {
+    const currentCard = offers.find((offer) => offer.id === offerId);
+    setSelectedCard(currentCard);
+  };
+
+  const onOfferCardLeave = () => {
+    setSelectedCard(undefined);
+  };
+
   const { currentCity, offers, currentSortingOption, onCityClick } = props;
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity);
   const [firstCity] = cityOffers;
@@ -96,11 +109,11 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{cityOffers.length} places to stay in {currentCity}</b>
               <SortingForm />
-              <OffersList offers={cityOffers} />
+              <OffersList offers={cityOffers} onOfferCardHover={onOfferCardHover} onOfferCardLeave={onOfferCardLeave} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={cityLocation} points={cityPoints} />
+                <Map city={cityLocation} points={cityPoints} selectedPoint={selectedCard} />
               </section>
             </div>
           </div>

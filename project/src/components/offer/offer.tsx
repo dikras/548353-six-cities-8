@@ -4,21 +4,25 @@ import { Link } from 'react-router-dom';
 
 type OfferProps = {
   offer: OfferType;
-  isActive: boolean;
-  onMouseOver: () => void;
-  onMouseLeave: () => void;
+  onMouseOver?: (offerId: number) => void;
+  onMouseLeave?: () => void;
 };
 
 function Offer(props: OfferProps): JSX.Element {
-  const { offer, isActive } = props;
+  const { offer, onMouseOver, onMouseLeave } = props;
   const { isFavorite, isPremium, previewImage, price, title, type } = offer;
+
+  const handleMouseOver = () => {
+    onMouseOver && onMouseOver(offer.id);
+  };
+
+  const handleMouseLeave = () => {
+    onMouseLeave && onMouseLeave();
+  };
 
   return (
     <article
-      className="cities__place-card place-card"
-      onMouseOver={props.onMouseOver}
-      onMouseLeave={props.onMouseLeave}
-      {...isActive}
+      className="cities__place-card place-card" onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}
     >
       {isPremium ?
         <div className="place-card__mark">
