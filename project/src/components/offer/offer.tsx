@@ -4,21 +4,25 @@ import { Link } from 'react-router-dom';
 
 type OfferProps = {
   offer: OfferType;
-  isActive: boolean;
-  onMouseOver: () => void;
-  onMouseLeave: () => void;
+  onMouseOver?: (offerId: number) => void;
+  onMouseLeave?: () => void;
 };
 
 function Offer(props: OfferProps): JSX.Element {
-  const { offer, isActive } = props;
+  const { offer, onMouseOver, onMouseLeave } = props;
   const { isFavorite, isPremium, previewImage, price, title, type } = offer;
+
+  const handleMouseOver = () => {
+    onMouseOver && onMouseOver(offer.id);
+  };
+
+  const handleMouseLeave = () => {
+    onMouseLeave && onMouseLeave();
+  };
 
   return (
     <article
-      className="cities__place-card place-card"
-      onMouseOver={props.onMouseOver}
-      onMouseLeave={props.onMouseLeave}
-      {...isActive}
+      className="cities__place-card place-card" onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}
     >
       {isPremium ?
         <div className="place-card__mark">
@@ -26,7 +30,7 @@ function Offer(props: OfferProps): JSX.Element {
         </div> : ''}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`} title="/offer/id">
-          <img className="place-card__image" src={ previewImage } width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={ previewImage } width="260" height="200" alt="Place" />
         </Link>
       </div>
       <div className="place-card__info">
