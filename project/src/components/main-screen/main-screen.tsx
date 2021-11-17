@@ -30,17 +30,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function MainScreen(props: PropsFromRedux): JSX.Element {
-  const [selectedCard, setSelectedCard] = useState<OfferType | undefined>(undefined);
-
-  const onOfferCardHover = (offerId: number) => {
-    const currentCard = offers.find((offer) => offer.id === offerId);
-    setSelectedCard(currentCard);
-  };
-
-  const onOfferCardLeave = () => {
-    setSelectedCard(undefined);
-  };
-
   const { currentCity, offers, currentSortingOption, onCityClick } = props;
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity);
   const [firstCity] = cityOffers;
@@ -51,6 +40,16 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
       lng: offer.location.longitude,
     }
   ));
+  const [selectedCard, setSelectedCard] = useState<OfferType | null>(null);
+
+  const onOfferCardHover = (offerId: number) => {
+    const currentCard = offers.find((offer) => offer.id === offerId);
+    setSelectedCard(currentCard);
+  };
+
+  const onOfferCardLeave = () => {
+    setSelectedCard(null);
+  };
 
   switch (currentSortingOption) {
     case SortingType.HighToLow:
