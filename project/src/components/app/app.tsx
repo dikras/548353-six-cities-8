@@ -1,5 +1,7 @@
-
+/* eslint-disable no-console */
+/* eslint-disable no-debugger */
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import {connect, ConnectedProps} from 'react-redux';
 import MainScreen from '../main-screen/main-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import SignInScreen from '../sign-in-screen/sign-in-screen';
@@ -7,15 +9,34 @@ import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found/not-found';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import { OffersType } from '../../types/offer';
 import { ReviewsType } from '../../types/review';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { State } from '../../types/state';
 
 type AppScreenProps = {
-  offers: OffersType;
   reviews: ReviewsType;
 }
 
-function App({ offers, reviews }: AppScreenProps): JSX.Element {
+const mapStateToProps = ({authorizationStatus, isDataLoaded, offers}: State) => ({
+  authorizationStatus,
+  isDataLoaded,
+  offers,
+});
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+type ConnectedComponentProps = PropsFromRedux & AppScreenProps;
+
+function App(props: ConnectedComponentProps): JSX.Element {
+  debugger;
+  const { reviews, offers, isDataLoaded } = props;
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>
@@ -47,4 +68,5 @@ function App({ offers, reviews }: AppScreenProps): JSX.Element {
   );
 }
 
-export default App;
+export {App};
+export default connector(App);

@@ -26,12 +26,6 @@ function SortingForm(props: PropsFromRedux): JSX.Element {
   const { currentSortingOption, onSortingOptionClick } = props;
   const [isClicked, setClicked] = useState(false);
 
-  let isActive = false;
-
-  const onOptionMouseOver = () => {
-    isActive = true;
-  };
-
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -45,8 +39,8 @@ function SortingForm(props: PropsFromRedux): JSX.Element {
         {Object.values(SortingType).map((sort, id) => {
           const keyValue = `${sort}-${id}`;
           return (
-            <li className={`places__option ${isActive ? 'places__option--active' : ''}`} tabIndex={0}
-              onMouseOver={onOptionMouseOver} key={keyValue}
+            <li className={`places__option ${currentSortingOption === sort ? 'places__option--active' : ''}`} tabIndex={0}
+              key={keyValue}
               onClick={() => onSortingOptionClick(sort)}
             >{sort}
             </li>
