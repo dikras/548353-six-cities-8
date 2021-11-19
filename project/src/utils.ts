@@ -1,4 +1,5 @@
 import { OfferType, OfferServerType } from './types/offer';
+import { User, UserServerType } from './types/user';
 
 export const adaptOfferToClent = (offer: OfferServerType): OfferType => ({
   bedrooms: offer.bedrooms,
@@ -33,4 +34,13 @@ export const adaptOfferToClent = (offer: OfferServerType): OfferType => ({
   rating: offer.rating,
   title: offer.title,
   type: offer.type,
+});
+
+export const adaptUserToClient = (user: UserServerType): User => ({
+  avatarUrl: user.avatar_url,
+  email: user.email,
+  id: user.id,
+  isPro: user.is_pro,
+  name: user.name,
+  token: user.token,
 });
