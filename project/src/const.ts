@@ -1,3 +1,6 @@
+export const AUTH_FAIL_MESSAGE = 'Do not forget to log in';
+export const SIGNIN_FAIL_MESSAGE = 'Make sure that all fields are filled correctly';
+
 export enum AppRoute {
   SignIn = '/login',
   Main = '/',

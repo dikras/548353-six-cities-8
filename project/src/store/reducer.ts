@@ -8,6 +8,7 @@ export const initialState = {
   currentSortingOption: SortingType.Default,
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
+  user: null,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -22,13 +23,23 @@ const reducer = (state: State = initialState, action: Actions): State => {
         offers: action.payload,
         isDataLoaded: true,
       };
-    /* case ActionType.RequireAuthorization:
+    case ActionType.RequireAuthorization:
       return {
         ...state,
         authorizationStatus: action.payload,
       };
-    case ActionType.RequireLogout:
-      return {...state, authorizationStatus: AuthorizationStatus.NoAuth}; */
+    case ActionType.UserLogin:
+      return {
+        ...state,
+        user: action.payload,
+        authorizationStatus: AuthorizationStatus.Auth,
+      };
+    case ActionType.UserLogout:
+      return {
+        ...state,
+        user: null,
+        authorizationStatus: AuthorizationStatus.NoAuth,
+      };
     default:
       return state;
   }

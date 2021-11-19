@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import Logo from '../logo/logo';
 import { OffersType, OfferType } from '../../types/offer';
 import {ReviewsType} from '../../types/review';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Review from '../review/review';
 import CommentForm from '../comment-form/comment-form';
+import Header from '../header/header';
 
 type RoomProps = {
   offers: OffersType;
@@ -33,26 +33,7 @@ function RoomScreen(props: RoomProps): JSX.Element {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link to="/login" className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__login">Sign in</span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header isMainScreen={false} isSigninScreen={false} />
 
       <main className="page__main page__main--property">
         <section className="property">
