@@ -12,28 +12,21 @@ import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { State } from '../../types/state';
 import browserHistory from '../../browser-history';
-import { ThunkAppDispatch } from '../../types/action';
-import { fetchReviewsAction } from '../../store/api-actions';
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded, offers, currentCity, reviews}: State) => ({
+const mapStateToProps = ({authorizationStatus, isDataLoaded, offers}: State) => ({
   authorizationStatus,
   isDataLoaded,
   offers,
-  currentCity,
-  reviews,
 });
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  handleFetchReviews: (id: string) => dispatch(fetchReviewsAction(id)),
-});
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function App(props: PropsFromRedux): JSX.Element {
-  const { reviews, offers, isDataLoaded, currentCity } = props;
-  console.log(reviews);
+  const { offers, isDataLoaded } = props;
+  // console.log(reviews);
 
   if (!isDataLoaded) {
     return (
@@ -57,11 +50,7 @@ function App(props: PropsFromRedux): JSX.Element {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Room}>
-          <RoomScreen
-            offers = {offers}
-            reviews = {reviews}
-            city={currentCity}
-          />
+          <RoomScreen />
         </Route>
         <Route>
           <NotFoundScreen />

@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import { OffersType, OfferType } from '../../types/offer';
-import {ReviewsType} from '../../types/review';
+import { OfferType } from '../../types/offer';
 import { useParams } from 'react-router-dom';
 import Review from '../review/review';
 import CommentForm from '../comment-form/comment-form';
@@ -10,17 +9,34 @@ import Map from '../map/map';
 import OffersList from '../offer-list/offer-list';
 import { useState } from 'react';
 import { getRating } from '../../utils';
+import { State } from '../../types/state';
+import { ThunkAppDispatch } from '../../types/action';
+import { fetchReviewsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
+import {connect, ConnectedProps} from 'react-redux';
 
-type RoomProps = {
-  offers: OffersType;
-  reviews: ReviewsType;
-  city: string;
-};
+const mapStateToProps = ({authorizationStatus, isDataLoaded, offers, currentCity, reviews}: State) => ({
+  authorizationStatus,
+  isDataLoaded,
+  offers,
+  currentCity,
+  reviews,
+});
 
-function RoomScreen(props: RoomProps): JSX.Element {
-  const { offers, reviews, city } = props;
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  handleFetchReviews: (id: string) => dispatch(fetchReviewsAction(id)),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+function RoomScreen(props: PropsFromRedux): JSX.Element {
+  const { offers, reviews, currentCity, handleFetchReviews } = props;
+
   const { id } = useParams<{ id: string }>();
-  const nearCityOffers = offers.filter((offer) => offer.city.name === city);
+
+  const nearCityOffers = offers.filter((offer) => offer.city.name === currentCity);
   const currentOffer = offers.find((offer) => offer.id.toString() === id) as OfferType;
   const {
     title,
@@ -55,6 +71,8 @@ function RoomScreen(props: RoomProps): JSX.Element {
   const onOfferCardLeave = () => {
     setSelectedCard(null);
   };
+
+  useEffect(() => {handleFetchReviews(id);},[handleFetchReviews, id]);
 
   return (
     <div className="page">
@@ -182,4 +200,5 @@ function RoomScreen(props: RoomProps): JSX.Element {
   );
 }
 
-export default RoomScreen;
+export {RoomScreen};
+export default connector(RoomScreen);
