@@ -9,6 +9,8 @@ export const initialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
   user: null,
+  reviews: [],
+  isReviewsLoaded: false,
 };
 
 const reducer = (state: State = initialState, action: Actions): State => {
@@ -22,6 +24,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
         ...state,
         offers: action.payload,
         isDataLoaded: true,
+      };
+    case ActionType.LoadReviews:
+      return {
+        ...state,
+        reviews: action.payload,
+        isReviewsLoaded: true,
       };
     case ActionType.RequireAuthorization:
       return {

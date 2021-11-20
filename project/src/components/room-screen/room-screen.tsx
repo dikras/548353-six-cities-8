@@ -9,6 +9,7 @@ import { OFFER_IMAGES_COUNT, OFFERS_NEARBY_COUNT } from '../../const';
 import Map from '../map/map';
 import OffersList from '../offer-list/offer-list';
 import { useState } from 'react';
+import { getRating } from '../../utils';
 
 type RoomProps = {
   offers: OffersType;
@@ -92,7 +93,7 @@ function RoomScreen(props: RoomProps): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
+                  <span style={{ width: `${getRating(rating)}%` }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{ rating }</span>
@@ -171,7 +172,7 @@ function RoomScreen(props: RoomProps): JSX.Element {
                 offers={nearOffers}
                 onOfferCardHover={onOfferCardHover}
                 onOfferCardLeave={onOfferCardLeave}
-                nearPlacesSection
+                isNearPlacesSection
               />
             </div>
           </section>

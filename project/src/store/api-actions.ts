@@ -1,13 +1,14 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffers, redirectToRoute, userLogout, userLogin} from './action';
+import {loadOffers, redirectToRoute, userLogout, userLogin, loadReviews} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AppRoute} from '../const';
 import {OfferServerType} from '../types/offer';
 import {AuthData} from '../types/auth-data';
 import {UserServerType} from '../types/user';
-import {adaptOfferToClent, adaptUserToClient} from '../utils';
+import {adaptOfferToClent, adaptUserToClient, adaptReviewToClient } from '../utils';
 import {toast} from 'react-toastify';
 import {AUTH_FAIL_MESSAGE, SIGNIN_FAIL_MESSAGE} from '../const';
+import { ReviewServerType } from '../types/review';
 
 export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -37,6 +38,12 @@ export const loginAction = ({login: email, password}: AuthData): ThunkActionResu
     } catch {
       toast.warn(SIGNIN_FAIL_MESSAGE);
     }
+  };
+
+export const fetchReviewsAction = (id: string): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<ReviewServerType[]>(`${APIRoute.Comments}/${id}`);
+    dispatch(loadReviews(data.map((review) => adaptReviewToClient(review))));
   };
 
 

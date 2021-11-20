@@ -87,7 +87,7 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
                 offers={cityOffers}
                 onOfferCardHover={onOfferCardHover}
                 onOfferCardLeave={onOfferCardLeave}
-                nearPlacesSection={false}
+                isNearPlacesSection={false}
               />
             </section>
             <div className="cities__right-section">

@@ -23,6 +23,8 @@ export const IconSize = {
   ANCHOR_HEIGHT: 40,
 };
 
+export const RATING_TO_CALC = 20;
+
 export const OFFER_IMAGES_COUNT = 6;
 
 export const OFFERS_NEARBY_COUNT = 3;
@@ -51,4 +53,13 @@ export enum APIRoute {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
+  Favorites = '/favorite'
+}
+
+export enum ReviewStatus {
+  Uploaded = 'UPLOADED',
+  NotUploaded = 'NOT_UPLOADED',
+  Uploading = 'UPLOADING',
+  Unknown = 'UNKNOWN',
 }

@@ -9,29 +9,31 @@ import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found/not-found';
 import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import { ReviewsType } from '../../types/review';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { State } from '../../types/state';
 import browserHistory from '../../browser-history';
+import { ThunkAppDispatch } from '../../types/action';
+import { fetchReviewsAction } from '../../store/api-actions';
 
-type AppScreenProps = {
-  reviews: ReviewsType;
-}
-
-const mapStateToProps = ({authorizationStatus, isDataLoaded, offers, currentCity}: State) => ({
+const mapStateToProps = ({authorizationStatus, isDataLoaded, offers, currentCity, reviews}: State) => ({
   authorizationStatus,
   isDataLoaded,
   offers,
   currentCity,
+  reviews,
 });
 
-const connector = connect(mapStateToProps);
+const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
+  handleFetchReviews: (id: string) => dispatch(fetchReviewsAction(id)),
+});
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & AppScreenProps;
 
-function App(props: ConnectedComponentProps): JSX.Element {
+function App(props: PropsFromRedux): JSX.Element {
   const { reviews, offers, isDataLoaded, currentCity } = props;
+  console.log(reviews);
 
   if (!isDataLoaded) {
     return (

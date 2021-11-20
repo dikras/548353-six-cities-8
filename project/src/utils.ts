@@ -1,5 +1,7 @@
 import { OfferType, OfferServerType } from './types/offer';
 import { User, UserServerType } from './types/user';
+import { ReviewServerType, ReviewType } from './types/review';
+import { RATING_TO_CALC } from './const';
 
 export const adaptOfferToClent = (offer: OfferServerType): OfferType => ({
   bedrooms: offer.bedrooms,
@@ -44,3 +46,21 @@ export const adaptUserToClient = (user: UserServerType): User => ({
   name: user.name,
   token: user.token,
 });
+
+export const adaptReviewToClient = (review: ReviewServerType): ReviewType => ({
+  comment: review.comment,
+  date: review.date,
+  id: review.id,
+  rating: review.rating,
+  user: {
+    avatarUrl: review.user.avatar_url,
+    id: review.user.id,
+    isPro: review.user.is_pro,
+    name: review.user.name,
+  },
+});
+
+export const getRating = (rating: number): number => {
+  const roundRating: number = Math.floor(rating);
+  return roundRating * RATING_TO_CALC;
+};

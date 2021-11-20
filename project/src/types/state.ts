@@ -1,6 +1,8 @@
 import { OffersType } from './offer';
 import { AuthorizationStatus } from '../const';
 import { User } from './user';
+import { ReviewsType } from './review';
+
 
 export type State = {
   currentCity: string,
@@ -8,5 +10,7 @@ export type State = {
   currentSortingOption: string,
   authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,
-  user: User | null;
+  user: User | null,
+  reviews: ReviewsType,
+  isReviewsLoaded: boolean,
 };

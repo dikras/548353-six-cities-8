@@ -2,6 +2,7 @@ import { ActionType } from '../types/action';
 import { OffersType } from '../types/offer';
 import { AppRoute, AuthorizationStatus } from '../const';
 import { User } from '../types/user';
+import { ReviewsType } from '../types/review';
 
 export const changeCity = (city: string) => ({
   type: ActionType.ChangeCity,
@@ -35,4 +36,9 @@ export const userLogout = () => ({
 export const redirectToRoute = (url: AppRoute) => ({
   type: ActionType.RedirectToRoute,
   payload: url,
+} as const);
+
+export const loadReviews = (reviews: ReviewsType) => ({
+  type: ActionType.LoadReviews,
+  payload: reviews,
 } as const);
