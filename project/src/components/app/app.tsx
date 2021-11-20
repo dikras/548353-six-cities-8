@@ -18,10 +18,11 @@ type AppScreenProps = {
   reviews: ReviewsType;
 }
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded, offers}: State) => ({
+const mapStateToProps = ({authorizationStatus, isDataLoaded, offers, currentCity}: State) => ({
   authorizationStatus,
   isDataLoaded,
   offers,
+  currentCity,
 });
 
 const connector = connect(mapStateToProps);
@@ -30,7 +31,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type ConnectedComponentProps = PropsFromRedux & AppScreenProps;
 
 function App(props: ConnectedComponentProps): JSX.Element {
-  const { reviews, offers, isDataLoaded } = props;
+  const { reviews, offers, isDataLoaded, currentCity } = props;
 
   if (!isDataLoaded) {
     return (
@@ -57,6 +58,7 @@ function App(props: ConnectedComponentProps): JSX.Element {
           <RoomScreen
             offers = {offers}
             reviews = {reviews}
+            city={currentCity}
           />
         </Route>
         <Route>

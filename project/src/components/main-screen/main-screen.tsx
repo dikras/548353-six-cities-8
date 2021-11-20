@@ -83,7 +83,12 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{cityOffers.length} places to stay in {currentCity}</b>
               <SortingForm />
-              <OffersList offers={cityOffers} onOfferCardHover={onOfferCardHover} onOfferCardLeave={onOfferCardLeave} />
+              <OffersList
+                offers={cityOffers}
+                onOfferCardHover={onOfferCardHover}
+                onOfferCardLeave={onOfferCardLeave}
+                nearPlacesSection={false}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

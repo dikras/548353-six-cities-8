@@ -17,11 +17,15 @@ export enum AuthorizationStatus {
 export const MAP_ZOOM = 10;
 
 export const IconSize = {
-  CUSTOM_WIDTH: 40,
+  CUSTOM_WIDTH: 30,
   CUSTOM_HEIGHT: 40,
   ANCHOR_WIDTH: 20,
   ANCHOR_HEIGHT: 40,
 };
+
+export const OFFER_IMAGES_COUNT = 6;
+
+export const OFFERS_NEARBY_COUNT = 3;
 
 export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 
