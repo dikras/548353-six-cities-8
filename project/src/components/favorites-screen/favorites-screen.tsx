@@ -1,6 +1,7 @@
 import Header from '../header/header';
 import { OffersType } from '../../types/offer';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type FavoritesScreenProps = {
   offers: OffersType;
@@ -115,9 +116,9 @@ function FavoritesScreen(props: FavoritesScreenProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link to={AppRoute.Main} className="footer__logo-link" href="main.html">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   );
