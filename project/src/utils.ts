@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { OfferType, OfferServerType } from './types/offer';
 import { User, UserServerType } from './types/user';
 import { ReviewServerType, ReviewType } from './types/review';
@@ -64,3 +65,5 @@ export const getRating = (rating: number): number => {
   const roundRating: number = Math.floor(rating);
   return roundRating * RATING_TO_CALC;
 };
+
+export const getDate = (date: string, format: string): string => dayjs(date).format(format);

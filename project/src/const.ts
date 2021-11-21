@@ -1,5 +1,8 @@
-export const AUTH_FAIL_MESSAGE = 'Do not forget to log in';
-export const SIGNIN_FAIL_MESSAGE = 'Make sure that all fields are filled correctly';
+export enum WarningMessage {
+  AuthFail = 'Do not forget to log in',
+  SigninFail = 'Make sure that all fields are filled correctly',
+  ReviewPostFail = 'Something wrong with posting, try again',
+}
 
 export enum AppRoute {
   SignIn = '/login',
@@ -33,6 +36,9 @@ export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
 
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_LENGTH = 300;
+
 export enum CityName {
   Paris = 'Paris',
   Cologne = 'Cologne',
@@ -58,8 +64,36 @@ export enum APIRoute {
 }
 
 export enum ReviewStatus {
-  Uploaded = 'UPLOADED',
   NotUploaded = 'NOT_UPLOADED',
   Uploading = 'UPLOADING',
+  Uploaded = 'UPLOADED',
   Unknown = 'UNKNOWN',
 }
+
+export const ratingStars = [
+  {
+    title: 'perfect',
+    value: 5,
+    id: '5-stars',
+  },
+  {
+    title: 'good',
+    value: 4,
+    id: '4-stars',
+  },
+  {
+    title: 'not bad',
+    value: 3,
+    id: '3-stars',
+  },
+  {
+    title: 'badly',
+    value: 2,
+    id: '2-stars',
+  },
+  {
+    title: 'terribly',
+    value: 1,
+    id: '1-star',
+  },
+];

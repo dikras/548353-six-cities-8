@@ -6,7 +6,12 @@ import {
   userLogin,
   userLogout,
   redirectToRoute,
-  loadReviews
+  loadReviews,
+  loadOffersNear,
+  loadOffer,
+  loadOfferFull,
+  loadOfferError,
+  postReview
 } from '../store/action';
 import {
   ThunkAction,
@@ -27,6 +32,10 @@ export enum ActionType {
   UserLogout = 'user/logout',
   RedirectToRoute = 'app/redirectToRoute',
   LoadReviews = 'data/loadReviews',
+  LoadOffersNear = 'data/loadOffersNear',
+  LoadOfferFull = 'data/loadOfferFull',
+  LoadOfferError = 'data/loadOfferError',
+  PostReview = 'user/postReview',
 }
 
 export type Actions =
@@ -37,7 +46,12 @@ export type Actions =
   | ReturnType<typeof userLogout>
   | ReturnType<typeof userLogin>
   | ReturnType<typeof redirectToRoute>
-  | ReturnType<typeof loadReviews>;
+  | ReturnType<typeof loadReviews>
+  | ReturnType<typeof loadOffersNear>
+  | ReturnType<typeof loadOffer>
+  | ReturnType<typeof loadOfferFull>
+  | ReturnType<typeof loadOfferError>
+  | ReturnType<typeof postReview>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 
