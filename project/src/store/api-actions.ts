@@ -1,13 +1,13 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffers, redirectToRoute, userLogout, userLogin} from './action';
+import {loadOffers, loadOffersNear, redirectToRoute, userLogout, userLogin, loadReviews, loadOffer, loadOfferFull, loadOfferError, postReview} from './action';
 import {saveToken, dropToken} from '../services/token';
-import {APIRoute, AppRoute} from '../const';
+import {APIRoute, AppRoute, WarningMessage, ReviewStatus} from '../const';
 import {OfferServerType} from '../types/offer';
 import {AuthData} from '../types/auth-data';
 import {UserServerType} from '../types/user';
-import {adaptOfferToClent, adaptUserToClient} from '../utils';
+import {adaptOfferToClent, adaptUserToClient, adaptReviewToClient } from '../utils';
 import {toast} from 'react-toastify';
-import {AUTH_FAIL_MESSAGE, SIGNIN_FAIL_MESSAGE} from '../const';
+import { ReviewServerType, ReviewPostType } from '../types/review';
 
 export const fetchOffersAction = (): ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -23,7 +23,7 @@ export const checkAuthAction = (): ThunkActionResult =>
         dispatch(userLogin(adaptUserToClient(response.data)));
       }
     } catch {
-      toast.info(AUTH_FAIL_MESSAGE);
+      toast.info(WarningMessage.AuthFail);
     }
   };
 
@@ -35,14 +35,51 @@ export const loginAction = ({login: email, password}: AuthData): ThunkActionResu
       dispatch(userLogin(adaptUserToClient(data)));
       dispatch(redirectToRoute(AppRoute.Main));
     } catch {
-      toast.warn(SIGNIN_FAIL_MESSAGE);
+      toast.warn(WarningMessage.SigninFail);
     }
   };
 
+export const fetchReviewsAction = (id: string): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<ReviewServerType[]>(`${APIRoute.Comments}/${id}`);
+    dispatch(loadReviews(data.map((review) => adaptReviewToClient(review))));
+  };
+
+export   const fetchOffersNear = (id: string): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<OfferServerType[]>(`${APIRoute.Offers}/${id}/nearby`);
+    dispatch(loadOffersNear(data.map((offer) => adaptOfferToClent(offer))));
+  };
+
+export const fetchOffer = (id: string): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    dispatch(loadOffer());
+    try {
+      const {data} = await api.get<OfferServerType>(`${APIRoute.Offers}/${id}`);
+      dispatch(loadOfferFull(adaptOfferToClent(data)));
+    } catch {
+      dispatch(loadOfferError());
+    }
+  };
 
 export const logoutAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     api.delete(APIRoute.Logout);
     dropToken();
     dispatch(userLogout());
+  };
+
+export  const uploadReview = ({userComment, rating} : ReviewPostType, id: string): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    dispatch(postReview(ReviewStatus.Uploading));
+    try {
+      await api.post<ReviewServerType[]>(`${APIRoute.Comments}/${id}`, {userComment, rating});
+      const {data} = await api.get<ReviewServerType[]>(`${APIRoute.Comments}/${id}`);
+      dispatch(loadReviews(data.map((review)=> adaptReviewToClient(review))));
+      dispatch(postReview(ReviewStatus.Uploaded));
+    }
+    catch {
+      dispatch(postReview(ReviewStatus.NotUploaded));
+      toast.warn(WarningMessage.ReviewPostFail);
+    }
   };

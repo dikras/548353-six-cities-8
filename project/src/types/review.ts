@@ -1,4 +1,4 @@
-export type UserType = {
+export type AuthorType = {
   avatarUrl: string;
   id: number;
   isPro: boolean;
@@ -10,7 +10,25 @@ export type ReviewType = {
   date: string;
   id: number;
   rating: number;
-  user: UserType;
+  user: AuthorType;
 };
+
+export type ReviewServerType = {
+  'comment': string;
+  'date': string;
+  'id': number;
+  'rating': number;
+  'user': {
+    'avatar_url': string,
+    'id': number,
+    'is_pro': boolean,
+    'name': string,
+  }
+};
+
+export type ReviewPostType = {
+  userComment: string;
+  rating: number;
+}
 
 export type ReviewsType = ReviewType[];

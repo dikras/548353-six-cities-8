@@ -1,4 +1,5 @@
 import { ReviewType } from '../../types/review';
+import { getDate } from '../../utils';
 
 type ReviewProps = {
   review: ReviewType;
@@ -28,7 +29,7 @@ function Review(props: ReviewProps): JSX.Element {
         <p className="reviews__text">
           { comment }
         </p>
-        <time className="reviews__time" dateTime={ date }>{ date }</time>
+        <time className="reviews__time" dateTime={getDate(date, 'YYYY-MM-DD')}>{getDate(date, 'MMMM YYYY')}</time>
       </div>
     </li>
   );

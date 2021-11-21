@@ -3,13 +3,13 @@ import { OffersType } from '../../types/offer';
 
 type OffersProps = {
   offers: OffersType;
-  nearPlacesSection: boolean;
+  isNearPlacesSection: boolean;
   onOfferCardHover?: (offerId: number) => void;
   onOfferCardLeave?: () => void;
 }
 
 function OffersList(props: OffersProps): JSX.Element {
-  const { offers, onOfferCardHover, onOfferCardLeave, nearPlacesSection } = props;
+  const { offers, onOfferCardHover, onOfferCardLeave, isNearPlacesSection } = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -21,7 +21,7 @@ function OffersList(props: OffersProps): JSX.Element {
             offer={offer}
             onMouseOver={onOfferCardHover}
             onMouseLeave={onOfferCardLeave}
-            nearPlacesSection={nearPlacesSection}
+            isNearPlacesSection={isNearPlacesSection}
           />
         );
       })}

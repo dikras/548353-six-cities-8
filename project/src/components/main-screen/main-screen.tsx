@@ -13,6 +13,7 @@ import { CityName, SortingType } from '../../const';
 import SortingForm from '../sorting-form/sorting-form';
 import { OfferType } from '../../types/offer';
 import Header from '../header/header';
+import MainScreenEmpty from './main-screen-empty';
 
 const mapStateToProps = ({currentCity, offers, currentSortingOption, authorizationStatus}: State) => ({
   currentCity,
@@ -33,6 +34,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function MainScreen(props: PropsFromRedux): JSX.Element {
   const { currentCity, offers, currentSortingOption, onCityClick } = props;
+  const hasNoOffers = offers.length === 0;
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity);
   const [firstCity] = cityOffers;
   const cityLocation = firstCity.city.location;
@@ -78,24 +80,25 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{cityOffers.length} places to stay in {currentCity}</b>
-              <SortingForm />
-              <OffersList
-                offers={cityOffers}
-                onOfferCardHover={onOfferCardHover}
-                onOfferCardLeave={onOfferCardLeave}
-                nearPlacesSection={false}
-              />
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-                <Map city={cityLocation} points={cityPoints} selectedPoint={selectedCard} />
+          {hasNoOffers ? <MainScreenEmpty currentCity={currentCity} /> :
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{cityOffers.length} places to stay in {currentCity}</b>
+                <SortingForm />
+                <OffersList
+                  offers={cityOffers}
+                  onOfferCardHover={onOfferCardHover}
+                  onOfferCardLeave={onOfferCardLeave}
+                  isNearPlacesSection={false}
+                />
               </section>
-            </div>
-          </div>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+                  <Map city={cityLocation} points={cityPoints} selectedPoint={selectedCard} />
+                </section>
+              </div>
+            </div>}
         </div>
       </main>
     </div>

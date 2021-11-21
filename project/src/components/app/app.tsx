@@ -9,29 +9,24 @@ import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found/not-found';
 import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
-import { ReviewsType } from '../../types/review';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { State } from '../../types/state';
 import browserHistory from '../../browser-history';
 
-type AppScreenProps = {
-  reviews: ReviewsType;
-}
-
-const mapStateToProps = ({authorizationStatus, isDataLoaded, offers, currentCity}: State) => ({
+const mapStateToProps = ({authorizationStatus, isDataLoaded, offers}: State) => ({
   authorizationStatus,
   isDataLoaded,
   offers,
-  currentCity,
 });
+
 
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = PropsFromRedux & AppScreenProps;
 
-function App(props: ConnectedComponentProps): JSX.Element {
-  const { reviews, offers, isDataLoaded, currentCity } = props;
+function App(props: PropsFromRedux): JSX.Element {
+  const { offers, isDataLoaded } = props;
+  // console.log(reviews);
 
   if (!isDataLoaded) {
     return (
@@ -55,11 +50,7 @@ function App(props: ConnectedComponentProps): JSX.Element {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Room}>
-          <RoomScreen
-            offers = {offers}
-            reviews = {reviews}
-            city={currentCity}
-          />
+          <RoomScreen />
         </Route>
         <Route>
           <NotFoundScreen />

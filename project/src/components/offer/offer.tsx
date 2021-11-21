@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 
 type OfferProps = {
   offer: OfferType;
-  nearPlacesSection: boolean;
+  isNearPlacesSection: boolean;
   onMouseOver?: (offerId: number) => void;
   onMouseLeave?: () => void;
 };
 
 function Offer(props: OfferProps): JSX.Element {
-  const { offer, onMouseOver, onMouseLeave, nearPlacesSection } = props;
+  const { offer, onMouseOver, onMouseLeave, isNearPlacesSection } = props;
   const { isFavorite, isPremium, previewImage, price, title, type } = offer;
 
   const handleMouseOver = () => {
@@ -23,7 +23,7 @@ function Offer(props: OfferProps): JSX.Element {
 
   return (
     <article
-      className={`${nearPlacesSection ? 'near-places__card' : 'cities__place-card'} place-card`} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}
+      className={`${isNearPlacesSection ? 'near-places__card' : 'cities__place-card'} place-card`} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}
     >
       {isPremium ?
         <div className="place-card__mark">
