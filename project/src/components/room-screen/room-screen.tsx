@@ -43,8 +43,6 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
   const { authorizationStatus, isOfferLoading, reviews, offersNear, offer, isReviewsLoaded, isOffersNearLoaded, isOfferError, handleFetchReviews, handleFetchOffersNear, handleFetchOffer } = props;
   const { id } = useParams<{ id: string }>();
 
-  // const nearCityOffers = offers.filter((offerNear) => offerNear.city.name === currentCity);
-  // const nearOffers = nearCityOffers.slice(0, 3);
   const [firstOfferNear] = offersNear;
   const cityLocation = firstOfferNear.city.location;
 
