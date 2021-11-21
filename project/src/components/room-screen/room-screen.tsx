@@ -43,9 +43,6 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
   const { authorizationStatus, isOfferLoading, reviews, offersNear, offer, isReviewsLoaded, isOffersNearLoaded, isOfferError, handleFetchReviews, handleFetchOffersNear, handleFetchOffer } = props;
   const { id } = useParams<{ id: string }>();
 
-  const [firstOfferNear] = offersNear;
-  const cityLocation = firstOfferNear.city.location;
-
   const pointsNear = offersNear.map((offerNear) => (
     {
       lat: offerNear.location.latitude,
@@ -180,7 +177,7 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
                 </section>
               </div>
             </div>
-            {isOffersNearLoaded ? <Map city={cityLocation} points={pointsNear} /> : <LoadingScreen />}
+            {isOffersNearLoaded ? <Map city={offer.city.location} points={pointsNear} /> : <LoadingScreen />}
           </section>
           {isOffersNearLoaded ?
             <div className="container">

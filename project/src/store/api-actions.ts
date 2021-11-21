@@ -69,11 +69,11 @@ export const logoutAction = (): ThunkActionResult =>
     dispatch(userLogout());
   };
 
-export  const uploadReview = ({userComment, rating} : ReviewPostType, id: string): ThunkActionResult =>
+export  const uploadReview = ({comment, rating} : ReviewPostType, id: string): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     dispatch(postReview(ReviewStatus.Uploading));
     try {
-      await api.post<ReviewServerType[]>(`${APIRoute.Comments}/${id}`, {userComment, rating});
+      await api.post<ReviewServerType[]>(`${APIRoute.Comments}/${id}`, {comment, rating});
       const {data} = await api.get<ReviewServerType[]>(`${APIRoute.Comments}/${id}`);
       dispatch(loadReviews(data.map((review)=> adaptReviewToClient(review))));
       dispatch(postReview(ReviewStatus.Uploaded));

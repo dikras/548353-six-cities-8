@@ -27,7 +27,7 @@ export type ReviewServerType = {
 };
 
 export type ReviewPostType = {
-  userComment: string;
+  comment: string;
   rating: number;
 }
 
