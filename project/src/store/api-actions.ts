@@ -1,8 +1,8 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffers, loadOffersNear, redirectToRoute, userLogout, userLogin, loadReviews, loadOffer, loadOfferFull, loadOfferError, postReview} from './action';
+import {loadOffers, updateOffers, loadOffersNear, redirectToRoute, userLogout, userLogin, loadReviews, loadOffer, loadOfferFull, loadOfferError, postReview} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AppRoute, WarningMessage, ReviewStatus} from '../const';
-import {OfferServerType} from '../types/offer';
+import {OfferServerType, OfferType} from '../types/offer';
 import {AuthData} from '../types/auth-data';
 import {UserServerType} from '../types/user';
 import {adaptOfferToClent, adaptUserToClient, adaptReviewToClient } from '../utils';
@@ -82,4 +82,11 @@ export  const uploadReview = ({comment, rating} : ReviewPostType, id: string): T
       dispatch(postReview(ReviewStatus.NotUploaded));
       toast.warn(WarningMessage.ReviewPostFail);
     }
+  };
+
+export const toggleFavoriteStatus = (id: number, isFavorite: boolean, onUpdate?: (updatedOffer: OfferType) => void): ThunkActionResult =>
+  async (dispatch, _getState, api) => {
+    const {data} = await api.post<OfferServerType>(`${APIRoute.Favorites}/${id}/${Number(!isFavorite)}`);
+    dispatch(updateOffers(adaptOfferToClent(data)));
+    onUpdate && onUpdate(adaptOfferToClent(data));
   };

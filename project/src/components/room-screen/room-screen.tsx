@@ -7,15 +7,15 @@ import Header from '../header/header';
 import { OFFER_IMAGES_COUNT, AuthorizationStatus } from '../../const';
 import Map from '../map/map';
 import OffersList from '../offer-list/offer-list';
-import React from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { getRating } from '../../utils';
 import { State } from '../../types/state';
 import { ThunkAppDispatch } from '../../types/action';
 import { fetchReviewsAction, fetchOffersNear, fetchOffer } from '../../store/api-actions';
-import { useEffect } from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found/not-found';
+import { REVIEWS_COUNT } from '../../const';
 
 const mapStateToProps = ({authorizationStatus, isDataLoaded, isOfferLoading, isOfferError, offer, reviews, offersNear, isReviewsLoaded, isOffersNearLoaded}: State) => ({
   authorizationStatus,
@@ -55,6 +55,12 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
     handleFetchOffersNear(id);
     handleFetchOffer(id);
   },[handleFetchReviews, handleFetchOffersNear, handleFetchOffer, id]);
+
+  const reviewsRecieved = useMemo(() =>
+    [...reviews]
+      .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+      .slice(0, REVIEWS_COUNT),
+  [reviews]);
 
   const renderOffer = () => {
     if (isOfferLoading) {
@@ -166,7 +172,7 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{ reviews.length }</span></h2>
                   {isReviewsLoaded ?
                     <ul className="reviews__list">
-                      {reviews.map((review) => {
+                      {reviewsRecieved.map((review) => {
                         const keyValue = `${review.id}`;
                         return (
                           <Review key={ keyValue } review={ review } />
@@ -177,7 +183,7 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
                 </section>
               </div>
             </div>
-            {isOffersNearLoaded ? <Map city={offer.city.location} points={pointsNear} /> : <LoadingScreen />}
+            {isOffersNearLoaded ? <Map city={offer.city.location} points={pointsNear} selectedPoint={offer} /> : <LoadingScreen />}
           </section>
           {isOffersNearLoaded ?
             <div className="container">

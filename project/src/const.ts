@@ -32,6 +32,8 @@ export const OFFER_IMAGES_COUNT = 6;
 
 export const OFFERS_NEARBY_COUNT = 3;
 
+export const REVIEWS_COUNT = 10;
+
 export const URL_MARKER_DEFAULT = '../../img/pin.svg';
 
 export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
