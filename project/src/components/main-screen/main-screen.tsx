@@ -18,11 +18,11 @@ import Header from '../header/header';
 import MainScreenEmpty from './main-screen-empty';
 import { toggleFavoriteStatus } from '../../store/api-actions';
 
-const mapStateToProps = ({currentCity, offers, currentSortingOption, authorizationStatus}: State) => ({
-  currentCity,
-  offers,
-  currentSortingOption,
-  authorizationStatus,
+const mapStateToProps = ({DATA, APP, USER}: State) => ({
+  currentCity: APP.currentCity,
+  offers: DATA.offers,
+  currentSortingOption: APP.currentSortingOption,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({

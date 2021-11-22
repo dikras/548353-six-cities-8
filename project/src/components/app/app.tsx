@@ -13,10 +13,10 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import { State } from '../../types/state';
 import browserHistory from '../../browser-history';
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded, offers}: State) => ({
-  authorizationStatus,
-  isDataLoaded,
-  offers,
+const mapStateToProps = ({USER, DATA}: State) => ({
+  authorizationStatus: USER.authorizationStatus,
+  isDataLoaded: DATA.isDataLoaded,
+  offers: DATA.offers,
 });
 
 

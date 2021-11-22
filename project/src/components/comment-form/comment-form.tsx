@@ -10,10 +10,10 @@ type CommentFormProps = {
   id: string,
 }
 
-const mapStateToProps = ({reviewStatus}: State) => ({
-  isReviewUploading: reviewStatus === ReviewStatus.Uploading,
-  isReviewUploaded: reviewStatus === ReviewStatus.Uploaded,
-  isReviewNotUploaded: reviewStatus === ReviewStatus.NotUploaded,
+const mapStateToProps = ({REVIEWS}: State) => ({
+  isReviewUploading: REVIEWS.reviewStatus === ReviewStatus.Uploading,
+  isReviewUploaded: REVIEWS.reviewStatus === ReviewStatus.Uploaded,
+  isReviewNotUploaded: REVIEWS.reviewStatus === ReviewStatus.NotUploaded,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

@@ -6,8 +6,8 @@ import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
 import { State } from '../../types/state';
 
-const mapStateToProps = ({currentCity}: State) => ({
-  currentCity,
+const mapStateToProps = ({APP}: State) => ({
+  currentCity: APP.currentCity,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

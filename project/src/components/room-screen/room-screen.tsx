@@ -17,16 +17,16 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found/not-found';
 import { REVIEWS_COUNT } from '../../const';
 
-const mapStateToProps = ({authorizationStatus, isDataLoaded, isOfferLoading, isOfferError, offer, reviews, offersNear, isReviewsLoaded, isOffersNearLoaded}: State) => ({
-  authorizationStatus,
-  isDataLoaded,
-  offer,
-  reviews,
-  offersNear,
-  isReviewsLoaded,
-  isOffersNearLoaded,
-  isOfferLoading,
-  isOfferError,
+const mapStateToProps = ({USER, DATA, REVIEWS}: State) => ({
+  authorizationStatus: USER.authorizationStatus,
+  isDataLoaded: DATA.isDataLoaded,
+  offer: DATA.offer,
+  reviews: REVIEWS.reviews,
+  offersNear: DATA.offersNear,
+  isReviewsLoaded: REVIEWS.isReviewsLoaded,
+  isOffersNearLoaded: DATA.isOffersNearLoaded,
+  isOfferLoading: DATA.isOfferLoading,
+  isOfferError: DATA.isOfferError,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

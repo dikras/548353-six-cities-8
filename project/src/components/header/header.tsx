@@ -12,9 +12,9 @@ type HeaderProps = {
   isSigninScreen: boolean;
 }
 
-const mapStateToProps = ({authorizationStatus, user}: State) => ({
-  authorizationStatus,
-  user,
+const mapStateToProps = ({USER}: State) => ({
+  authorizationStatus: USER.authorizationStatus,
+  user: USER.user,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
