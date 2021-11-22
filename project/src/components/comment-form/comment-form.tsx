@@ -5,15 +5,16 @@ import { State } from '../../types/state';
 import { ReviewPostType } from '../../types/review';
 import { ReviewStatus, ratingStars, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 import { uploadReview } from '../../store/api-actions';
+import { getReviewsStatus } from '../../store/reviews-process/selectors';
 
 type CommentFormProps = {
   id: string,
 }
 
-const mapStateToProps = ({REVIEWS}: State) => ({
-  isReviewUploading: REVIEWS.reviewStatus === ReviewStatus.Uploading,
-  isReviewUploaded: REVIEWS.reviewStatus === ReviewStatus.Uploaded,
-  isReviewNotUploaded: REVIEWS.reviewStatus === ReviewStatus.NotUploaded,
+const mapStateToProps = (state: State) => ({
+  isReviewUploading: getReviewsStatus(state) === ReviewStatus.Uploading,
+  isReviewUploaded: getReviewsStatus(state) === ReviewStatus.Uploaded,
+  isReviewNotUploaded: getReviewsStatus(state) === ReviewStatus.NotUploaded,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

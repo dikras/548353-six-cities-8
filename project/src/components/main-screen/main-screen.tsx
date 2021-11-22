@@ -17,12 +17,15 @@ import { OfferType } from '../../types/offer';
 import Header from '../header/header';
 import MainScreenEmpty from './main-screen-empty';
 import { toggleFavoriteStatus } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getOffers } from '../../store/offers-data/selectors';
+import { getCurrentCity, getCurrentSortOption } from '../../store/app-process/selectors';
 
-const mapStateToProps = ({DATA, APP, USER}: State) => ({
-  currentCity: APP.currentCity,
-  offers: DATA.offers,
-  currentSortingOption: APP.currentSortingOption,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state: State) => ({
+  currentCity: getCurrentCity(state),
+  offers: getOffers(state),
+  currentSortingOption: getCurrentSortOption(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({

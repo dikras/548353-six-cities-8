@@ -12,11 +12,13 @@ import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { State } from '../../types/state';
 import browserHistory from '../../browser-history';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getIsDataLoaded, getOffers } from '../../store/offers-data/selectors';
 
-const mapStateToProps = ({USER, DATA}: State) => ({
-  authorizationStatus: USER.authorizationStatus,
-  isDataLoaded: DATA.isDataLoaded,
-  offers: DATA.offers,
+const mapStateToProps = (state: State) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  isDataLoaded: getIsDataLoaded(state),
+  offers: getOffers(state),
 });
 
 

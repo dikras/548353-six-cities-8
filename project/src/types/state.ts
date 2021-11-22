@@ -1,12 +1,12 @@
 import { OffersType, OfferType } from './offer';
-import { AuthorizationStatus, ReviewStatus } from '../const';
+import { AuthorizationStatus, ReviewStatus, CityName, SortingType } from '../const';
 import { User } from './user';
 import { ReviewsType } from './review';
 import {  RootState } from '../store/root-reducer';
 
 export type AppProcess = {
-  currentCity: string,
-  currentSortingOption: string,
+  currentCity: CityName,
+  currentSortingOption: SortingType,
 };
 
 export type UserProcess = {

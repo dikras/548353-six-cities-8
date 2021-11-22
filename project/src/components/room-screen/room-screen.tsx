@@ -16,17 +16,20 @@ import {connect, ConnectedProps} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found/not-found';
 import { REVIEWS_COUNT } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getOffer, getOffersNear, getIsDataLoaded, getIsOffersNearLoaded, getIsOfferLoading, getIsOfferError } from '../../store/offers-data/selectors';
+import { getReviews, getIsReviewsLoaded } from '../../store/reviews-process/selectors';
 
-const mapStateToProps = ({USER, DATA, REVIEWS}: State) => ({
-  authorizationStatus: USER.authorizationStatus,
-  isDataLoaded: DATA.isDataLoaded,
-  offer: DATA.offer,
-  reviews: REVIEWS.reviews,
-  offersNear: DATA.offersNear,
-  isReviewsLoaded: REVIEWS.isReviewsLoaded,
-  isOffersNearLoaded: DATA.isOffersNearLoaded,
-  isOfferLoading: DATA.isOfferLoading,
-  isOfferError: DATA.isOfferError,
+const mapStateToProps = (state: State) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  isDataLoaded: getIsDataLoaded(state),
+  offer: getOffer(state),
+  reviews: getReviews(state),
+  offersNear: getOffersNear(state),
+  isReviewsLoaded: getIsReviewsLoaded(state),
+  isOffersNearLoaded: getIsOffersNearLoaded(state),
+  isOfferLoading: getIsOfferLoading(state),
+  isOfferError: getIsOfferError(state),
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
