@@ -9,7 +9,6 @@ import LocationsList from '../locations-list/locations-list';
 import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {State} from '../../types/state';
-import {Actions} from '../../types/action';
 import { changeCity } from '../../store/action';
 import { CityName, CardType, SortingType, AuthorizationStatus, AppRoute } from '../../const';
 import SortingForm from '../sorting-form/sorting-form';
@@ -28,7 +27,7 @@ const mapStateToProps = (state: State) => ({
   authorizationStatus: getAuthorizationStatus(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onCityClick(city: CityName) {
     dispatch(changeCity(city));
   },

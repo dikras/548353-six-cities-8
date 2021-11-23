@@ -1,6 +1,7 @@
+import {createReducer} from '@reduxjs/toolkit';
 import {  ReviewsProcess } from '../../types/state';
 import { ReviewStatus } from '../../const';
-import { Actions, ActionType } from '../../types/action';
+import { loadReviews, postReview } from '../action';
 
 const initialState: ReviewsProcess = {
   reviews: [],
@@ -9,19 +10,15 @@ const initialState: ReviewsProcess = {
   isPostReviewError: false,
 };
 
-const reviewsProcess = (state = initialState, action: Actions): ReviewsProcess => {
-  switch(action.type) {
-    case ActionType.LoadReviews:
-      return {
-        ...state,
-        reviews: action.payload,
-        isReviewsLoaded: true,
-      };
-    case ActionType.PostReview:
-      return {...state, reviewStatus: action.payload};
-    default:
-      return state;
-  }
-};
+const reviewsProcess = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+      state.isReviewsLoaded = true;
+    })
+    .addCase(postReview, (state, action) => {
+      state.reviewStatus = action.payload;
+    });
+});
 
 export {reviewsProcess};

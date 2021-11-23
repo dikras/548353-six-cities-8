@@ -5,7 +5,6 @@ import { SortingType } from '../../const';
 import { Dispatch } from 'redux';
 import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
-import { Actions } from '../../types/action';
 import { changeSorting } from '../../store/action';
 import { getCurrentSortOption } from '../../store/app-process/selectors';
 
@@ -13,7 +12,7 @@ const mapStateToProps = (state: State) => ({
   currentSortingOption: getCurrentSortOption(state),
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   onSortingOptionClick(currentSortingOption: SortingType) {
     dispatch(changeSorting(currentSortingOption));
   },

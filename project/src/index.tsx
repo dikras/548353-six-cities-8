@@ -1,16 +1,13 @@
 /* eslint-disable no-console */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { createAPI } from './services/api';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import {configureStore} from '@reduxjs/toolkit';
 import App from './components/app/app';
 import { rootReducer } from './store/root-reducer';
 import { requireAuthorization } from './store/action';
 import { fetchOffersAction, checkAuthAction } from './store/api-actions';
-import { ThunkAppDispatch } from './types/action';
 import { AuthorizationStatus } from './const';
 import { redirect } from './store/middlewares/redirect';
 import {ToastContainer} from 'react-toastify';
@@ -20,16 +17,18 @@ const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
 );
 
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api)),
-    applyMiddleware(redirect),
-  ),
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }).concat(redirect),
+});
 
-(store.dispatch as ThunkAppDispatch)(checkAuthAction());
-(store.dispatch as ThunkAppDispatch)(fetchOffersAction());
+store.dispatch(checkAuthAction());
+store.dispatch(fetchOffersAction());
 
 ReactDOM.render(
   <React.StrictMode>

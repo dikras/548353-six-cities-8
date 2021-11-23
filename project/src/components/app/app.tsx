@@ -21,7 +21,6 @@ const mapStateToProps = (state: State) => ({
   offers: getOffers(state),
 });
 
-
 const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;

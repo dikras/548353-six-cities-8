@@ -1,30 +1,26 @@
+import {createReducer} from '@reduxjs/toolkit';
 import { FavoriteOffersData } from '../../types/state';
-import { Actions, ActionType } from '../../types/action';
+import { loadFavoriteOffers, updateFavoriteOffers } from '../action';
 
 const initialState: FavoriteOffersData = {
   offersFavorite: [],
   isOffersFavoriteLoaded: false,
 };
 
-const favoriteOffersData = (state = initialState, action: Actions): FavoriteOffersData => {
-  switch(action.type) {
-    case ActionType.LoadFavoriteOffers:
-      return {...state,
-        offersFavorite: action.payload,
-        isOffersFavoriteLoaded: true,
-      };
-    case ActionType.UpdateFavoriteOffers:
-      return {...state,
-        offersFavorite: state.offersFavorite.map((offer) => {
-          if (offer.id !== action.payload.id) {
-            return offer;
-          }
-          return action.payload;
-        }),
-      };
-    default:
-      return state;
-  }
-};
+const favoriteOffersData = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadFavoriteOffers, (state, action) => {
+      state.offersFavorite = action.payload;
+      state.isOffersFavoriteLoaded = true;
+    })
+    .addCase(updateFavoriteOffers, (state, action) => {
+      state.offersFavorite = state.offersFavorite.map((offer) => {
+        if (offer.id !== action.payload.id) {
+          return offer;
+        }
+        return action.payload;
+      });
+    });
+});
 
 export {favoriteOffersData};
