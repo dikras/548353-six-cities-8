@@ -26,6 +26,23 @@ export const IconSize = {
   ANCHOR_HEIGHT: 40,
 };
 
+export enum CardType {
+  City = 'CITY',
+  Near ='NEAR',
+  Favorite ='FAVORITE',
+}
+
+export const CardImageSize = {
+  main: {
+    height: '200',
+    width: '260',
+  },
+  favorite: {
+    height: '110',
+    width: '150',
+  },
+};
+
 export const RATING_TO_CALC = 20;
 
 export const OFFER_IMAGES_COUNT = 6;

@@ -1,42 +1,60 @@
 /* eslint-disable no-console */
 import { OfferType } from '../../types/offer';
 import { Link } from 'react-router-dom';
+import { CardType, CardImageSize } from '../../const';
 
 type OfferProps = {
   offer: OfferType;
-  isNearPlacesSection: boolean;
+  cardType: string;
   onFavoriteClick?: (offerId: number, isFavorite: boolean) => void;
   onMouseOver?: (offerId: number) => void;
   onMouseLeave?: () => void;
 };
 
 function Offer(props: OfferProps): JSX.Element {
-  const { offer, onFavoriteClick, onMouseOver, onMouseLeave, isNearPlacesSection } = props;
+  const { offer, onFavoriteClick, onMouseOver, onMouseLeave, cardType } = props;
   const { isFavorite, id, isPremium, previewImage, price, title, type } = offer;
 
+  const isFavoriteCard = cardType === CardType.Favorite;
+  const isCitiesCard = cardType === CardType.City;
+  const isNearPlacesSection = cardType === CardType.Near;
+
   const handleFavoriteClick = () => {
-    onFavoriteClick && onFavoriteClick(id, isFavorite);
+    if (onFavoriteClick) {
+      onFavoriteClick(id, isFavorite);
+    }
   };
 
   const handleMouseOver = () => {
-    onMouseOver && onMouseOver(offer.id);
+    if (onMouseOver) {
+      onMouseOver(offer.id);
+    }
   };
 
   const handleMouseLeave = () => {
-    onMouseLeave && onMouseLeave();
+    if (onMouseLeave) {
+      onMouseLeave();
+    }
   };
 
   return (
     <article
-      className={`${isNearPlacesSection ? 'near-places__card' : 'cities__place-card'} place-card`} onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave}
+      className={`place-card ${isCitiesCard ? 'cities__place-card' : ''} ${isNearPlacesSection ? 'near-places__card' : ''} ${isFavoriteCard ? 'favorites__card' : ''}`}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
     >
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
         </div> : ''}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`place-card__image-wrapper ${isCitiesCard ? 'cities__image-wrapper' : ''} ${isFavoriteCard ? 'favorites__image-wrapper' : ''}`}>
         <Link to={`/offer/${offer.id}`} title="/offer/id">
-          <img className="place-card__image" src={ previewImage } width="260" height="200" alt="Place" />
+          <img className="place-card__image"
+            src={previewImage}
+            width={!isFavoriteCard ? CardImageSize.main.width : CardImageSize.favorite.width}
+            height={!isFavoriteCard ? CardImageSize.main.height : CardImageSize.favorite.height}
+            alt="Place"
+          />
         </Link>
       </div>
       <div className="place-card__info">

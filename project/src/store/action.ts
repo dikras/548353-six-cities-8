@@ -70,3 +70,13 @@ export const postReview = (postReviewStatus: ReviewStatus) => ({
   type: ActionType.PostReview,
   payload: postReviewStatus,
 } as const);
+
+export const loadFavoriteOffers = (offers: OffersType) => ({
+  type: ActionType.LoadFavoriteOffers,
+  payload: offers,
+} as const);
+
+export const updateFavoriteOffers = (offer: OfferType) => ({
+  type: ActionType.UpdateFavoriteOffers,
+  payload: offer,
+} as const);

@@ -31,4 +31,9 @@ export type ReviewsProcess = {
   isPostReviewError: boolean,
 };
 
+export type FavoriteOffersData = {
+  offersFavorite: OffersType;
+  isOffersFavoriteLoaded: boolean;
+};
+
 export type State = RootState;

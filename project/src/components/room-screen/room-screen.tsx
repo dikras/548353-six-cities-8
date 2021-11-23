@@ -15,7 +15,7 @@ import { fetchReviewsAction, fetchOffersNear, fetchOffer } from '../../store/api
 import {connect, ConnectedProps} from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found/not-found';
-import { REVIEWS_COUNT } from '../../const';
+import { REVIEWS_COUNT, CardType } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getOffer, getOffersNear, getIsDataLoaded, getIsOffersNearLoaded, getIsOfferLoading, getIsOfferError } from '../../store/offers-data/selectors';
 import { getReviews, getIsReviewsLoaded } from '../../store/reviews-process/selectors';
@@ -45,8 +45,6 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 function RoomScreen(props: PropsFromRedux): JSX.Element {
   const { authorizationStatus, isOfferLoading, reviews, offersNear, offer, isReviewsLoaded, isOffersNearLoaded, isOfferError, handleFetchReviews, handleFetchOffersNear, handleFetchOffer } = props;
   const { id } = useParams<{ id: string }>();
-
-  console.log(offersNear);
 
   const pointsNear = offersNear.map((offerNear) => (
     {
@@ -197,7 +195,7 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
                 <div className="near-places__list places__list">
                   <OffersList
                     offers={offersNear}
-                    isNearPlacesSection
+                    cardType={CardType.Near}
                   />
                 </div>
               </section>

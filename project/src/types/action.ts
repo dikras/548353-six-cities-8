@@ -12,7 +12,9 @@ import {
   loadOfferFull,
   loadOfferError,
   postReview,
-  updateOffers
+  updateOffers,
+  loadFavoriteOffers,
+  updateFavoriteOffers
 } from '../store/action';
 import {
   ThunkAction,
@@ -38,6 +40,8 @@ export enum ActionType {
   LoadOfferFull = 'data/loadOfferFull',
   LoadOfferError = 'data/loadOfferError',
   PostReview = 'user/postReview',
+  LoadFavoriteOffers = 'data/loadFavoriteOffers',
+  UpdateFavoriteOffers = 'data/updateFavoriteOffers',
 }
 
 export type Actions =
@@ -54,7 +58,9 @@ export type Actions =
   | ReturnType<typeof loadOfferFull>
   | ReturnType<typeof loadOfferError>
   | ReturnType<typeof postReview>
-  | ReturnType<typeof updateOffers>;
+  | ReturnType<typeof updateOffers>
+  | ReturnType<typeof loadFavoriteOffers>
+  | ReturnType<typeof updateFavoriteOffers>;
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Actions>;
 

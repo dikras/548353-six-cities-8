@@ -11,7 +11,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import {State} from '../../types/state';
 import {Actions} from '../../types/action';
 import { changeCity } from '../../store/action';
-import { CityName, SortingType, AuthorizationStatus, AppRoute } from '../../const';
+import { CityName, CardType, SortingType, AuthorizationStatus, AppRoute } from '../../const';
 import SortingForm from '../sorting-form/sorting-form';
 import { OfferType } from '../../types/offer';
 import Header from '../header/header';
@@ -107,8 +107,8 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
                   offers={cityOffers}
                   onOfferCardHover={onOfferCardHover}
                   onOfferCardLeave={onOfferCardLeave}
-                  isNearPlacesSection={false}
                   onFavoriteClick={handleFavoriteClick}
+                  cardType={CardType.City}
                 />
               </section>
               <div className="cities__right-section">

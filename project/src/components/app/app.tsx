@@ -27,8 +27,7 @@ const connector = connect(mapStateToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function App(props: PropsFromRedux): JSX.Element {
-  const { offers, isDataLoaded } = props;
-  // console.log(reviews);
+  const { isDataLoaded } = props;
 
   if (!isDataLoaded) {
     return (
@@ -48,7 +47,7 @@ function App(props: PropsFromRedux): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.Favorites}
-          render={() => <FavoritesScreen offers = {offers} />}
+          render={() => <FavoritesScreen />}
         >
         </PrivateRoute>
         <Route exact path={AppRoute.Room}>

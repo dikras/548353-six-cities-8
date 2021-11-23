@@ -1,5 +1,17 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffers, updateOffers, loadOffersNear, redirectToRoute, userLogout, userLogin, loadReviews, loadOffer, loadOfferFull, loadOfferError, postReview} from './action';
+import {loadOffers,
+  updateOffers,
+  loadOffersNear,
+  redirectToRoute,
+  userLogout,
+  userLogin,
+  loadReviews,
+  loadOffer,
+  loadOfferFull,
+  loadOfferError,
+  postReview,
+  loadFavoriteOffers
+} from './action';
 import {saveToken, dropToken} from '../services/token';
 import {APIRoute, AppRoute, WarningMessage, ReviewStatus} from '../const';
 import {OfferServerType, OfferType} from '../types/offer';
@@ -89,4 +101,10 @@ export const toggleFavoriteStatus = (id: number, isFavorite: boolean, onUpdate?:
     const {data} = await api.post<OfferServerType>(`${APIRoute.Favorites}/${id}/${Number(!isFavorite)}`);
     dispatch(updateOffers(adaptOfferToClent(data)));
     onUpdate && onUpdate(adaptOfferToClent(data));
+  };
+
+export const fetchFavorites = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<OfferServerType[]>(APIRoute.Favorites);
+    dispatch(loadFavoriteOffers(data.map((offer) => adaptOfferToClent(offer))));
   };
