@@ -5,9 +5,10 @@ import {loginAction} from '../../store/api-actions';
 import {ThunkAppDispatch} from '../../types/action';
 import {AuthData} from '../../types/auth-data';
 import { State } from '../../types/state';
+import { getCurrentCity } from '../../store/app-process/selectors';
 
-const mapStateToProps = ({currentCity}: State) => ({
-  currentCity,
+const mapStateToProps = (state: State) => ({
+  currentCity: getCurrentCity(state),
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({

@@ -1,25 +1,31 @@
 /* eslint-disable no-console */
 /* eslint-disable no-debugger */
 import { useState } from 'react';
+import {useDispatch} from 'react-redux';
 import OffersList from '../offer-list/offer-list';
 import Map from '../map/map';
+import { useHistory } from 'react-router';
 import LocationsList from '../locations-list/locations-list';
 import {Dispatch} from 'redux';
 import {connect, ConnectedProps} from 'react-redux';
 import {State} from '../../types/state';
 import {Actions} from '../../types/action';
 import { changeCity } from '../../store/action';
-import { CityName, SortingType } from '../../const';
+import { CityName, SortingType, AuthorizationStatus, AppRoute } from '../../const';
 import SortingForm from '../sorting-form/sorting-form';
 import { OfferType } from '../../types/offer';
 import Header from '../header/header';
 import MainScreenEmpty from './main-screen-empty';
+import { toggleFavoriteStatus } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getOffers } from '../../store/offers-data/selectors';
+import { getCurrentCity, getCurrentSortOption } from '../../store/app-process/selectors';
 
-const mapStateToProps = ({currentCity, offers, currentSortingOption, authorizationStatus}: State) => ({
-  currentCity,
-  offers,
-  currentSortingOption,
-  authorizationStatus,
+const mapStateToProps = (state: State) => ({
+  currentCity: getCurrentCity(state),
+  offers: getOffers(state),
+  currentSortingOption: getCurrentSortOption(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
@@ -33,7 +39,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 function MainScreen(props: PropsFromRedux): JSX.Element {
-  const { currentCity, offers, currentSortingOption, onCityClick } = props;
+  const { currentCity, offers, currentSortingOption, onCityClick, authorizationStatus } = props;
   const hasNoOffers = offers.length === 0;
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity);
   const [firstCity] = cityOffers;
@@ -45,6 +51,17 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
     }
   ));
   const [selectedCard, setSelectedCard] = useState<OfferType | null>(null);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleFavoriteClick = (offerId: number, isFavorite: boolean) => {
+    if (authorizationStatus !== AuthorizationStatus.Auth) {
+      history.push(AppRoute.SignIn);
+      return;
+    }
+    dispatch(toggleFavoriteStatus(offerId, isFavorite));
+  };
 
   const onOfferCardHover = (offerId: number) => {
     const currentCard = offers.find((offer) => offer.id === offerId);
@@ -91,6 +108,7 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
                   onOfferCardHover={onOfferCardHover}
                   onOfferCardLeave={onOfferCardLeave}
                   isNearPlacesSection={false}
+                  onFavoriteClick={handleFavoriteClick}
                 />
               </section>
               <div className="cities__right-section">

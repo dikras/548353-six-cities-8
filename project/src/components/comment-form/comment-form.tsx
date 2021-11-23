@@ -5,15 +5,16 @@ import { State } from '../../types/state';
 import { ReviewPostType } from '../../types/review';
 import { ReviewStatus, ratingStars, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 import { uploadReview } from '../../store/api-actions';
+import { getReviewsStatus } from '../../store/reviews-process/selectors';
 
 type CommentFormProps = {
   id: string,
 }
 
-const mapStateToProps = ({reviewStatus}: State) => ({
-  isReviewUploading: reviewStatus === ReviewStatus.Uploading,
-  isReviewUploaded: reviewStatus === ReviewStatus.Uploaded,
-  isReviewNotUploaded: reviewStatus === ReviewStatus.NotUploaded,
+const mapStateToProps = (state: State) => ({
+  isReviewUploading: getReviewsStatus(state) === ReviewStatus.Uploading,
+  isReviewUploaded: getReviewsStatus(state) === ReviewStatus.Uploaded,
+  isReviewNotUploaded: getReviewsStatus(state) === ReviewStatus.NotUploaded,
 });
 
 const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
@@ -28,9 +29,9 @@ type ConnectedComponentProps = CommentFormProps & PropsFromRedux;
 
 function CommentForm(props: ConnectedComponentProps): JSX.Element {
   const { id, handlePostReview, isReviewNotUploaded, isReviewUploading, isReviewUploaded } = props;
-  const [userComment, setUserComment] = useState('');
-  const [userRating, setUserRating] = useState('');
-  const isFormComplete = userComment.length > MIN_COMMENT_LENGTH;
+  const [comment, setUserComment] = useState('');
+  const [rating, setUserRating] = useState('');
+  const isFormComplete = comment.length > MIN_COMMENT_LENGTH;
 
   const handleCommentFieldChange = ({target}: ChangeEvent<HTMLTextAreaElement>) => {
     const value = target.value;
@@ -44,7 +45,7 @@ function CommentForm(props: ConnectedComponentProps): JSX.Element {
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    handlePostReview({userComment, rating: Number(userRating)}, id);
+    handlePostReview({comment, rating: Number(rating)}, id);
   };
 
   useEffect(() => {
@@ -71,7 +72,7 @@ function CommentForm(props: ConnectedComponentProps): JSX.Element {
               type="radio"
               value={`${star.value}`}
               id={star.id}
-              checked={star.value === Number(userRating)}
+              checked={star.value === Number(rating)}
               onChange={handleRatingChange}
               disabled={isReviewUploading}
             />
@@ -89,7 +90,7 @@ function CommentForm(props: ConnectedComponentProps): JSX.Element {
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleCommentFieldChange}
         maxLength={MAX_COMMENT_LENGTH}
-        value={userComment}
+        value={comment}
         disabled={isReviewUploading}
       />
       <div className="reviews__button-wrapper">

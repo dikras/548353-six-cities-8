@@ -7,9 +7,10 @@ import { connect, ConnectedProps } from 'react-redux';
 import { State } from '../../types/state';
 import { Actions } from '../../types/action';
 import { changeSorting } from '../../store/action';
+import { getCurrentSortOption } from '../../store/app-process/selectors';
 
-const mapStateToProps = ({currentSortingOption}: State) => ({
-  currentSortingOption,
+const mapStateToProps = (state: State) => ({
+  currentSortingOption: getCurrentSortOption(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({

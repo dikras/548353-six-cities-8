@@ -1,15 +1,15 @@
 import { ActionType } from '../types/action';
 import { OffersType, OfferType } from '../types/offer';
-import { AppRoute, AuthorizationStatus, ReviewStatus } from '../const';
+import { AppRoute, AuthorizationStatus, ReviewStatus, CityName, SortingType } from '../const';
 import { User } from '../types/user';
 import { ReviewsType } from '../types/review';
 
-export const changeCity = (city: string) => ({
+export const changeCity = (city: CityName) => ({
   type: ActionType.ChangeCity,
   payload: city,
 } as const);
 
-export const changeSorting = (sortingType: string) => ({
+export const changeSorting = (sortingType: SortingType) => ({
   type: ActionType.ChangeSorting,
   payload: sortingType,
 } as const);
@@ -17,6 +17,11 @@ export const changeSorting = (sortingType: string) => ({
 export const loadOffers = (offers: OffersType) => ({
   type: ActionType.LoadOffers,
   payload: offers,
+} as const);
+
+export const updateOffers = (offer: OfferType) => ({
+  type: ActionType.UpdateOffers,
+  payload: offer,
 } as const);
 
 export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
