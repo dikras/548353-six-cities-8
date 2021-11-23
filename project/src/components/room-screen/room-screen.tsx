@@ -46,6 +46,8 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
   const { authorizationStatus, isOfferLoading, reviews, offersNear, offer, isReviewsLoaded, isOffersNearLoaded, isOfferError, handleFetchReviews, handleFetchOffersNear, handleFetchOffer } = props;
   const { id } = useParams<{ id: string }>();
 
+  console.log(offersNear);
+
   const pointsNear = offersNear.map((offerNear) => (
     {
       lat: offerNear.location.latitude,

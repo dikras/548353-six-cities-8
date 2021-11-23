@@ -25,6 +25,12 @@ const offersData = (state = initialState, action: Actions): OffersData => {
         isOfferLoading: true,
         isOfferError: false,
       };
+    case ActionType.LoadOffersNear:
+      return {
+        ...state,
+        offersNear: action.payload,
+        isOffersNearLoaded: true,
+      };
     case ActionType.LoadOfferFull:
       return {
         ...state,
