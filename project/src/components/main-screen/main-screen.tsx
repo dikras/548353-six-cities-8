@@ -1,14 +1,11 @@
 /* eslint-disable no-console */
 /* eslint-disable no-debugger */
 import { useState } from 'react';
-import {useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import OffersList from '../offer-list/offer-list';
 import Map from '../map/map';
 import { useHistory } from 'react-router';
 import LocationsList from '../locations-list/locations-list';
-import {Dispatch} from 'redux';
-import {connect, ConnectedProps} from 'react-redux';
-import {State} from '../../types/state';
 import { changeCity } from '../../store/action';
 import { CityName, CardType, SortingType, AuthorizationStatus, AppRoute } from '../../const';
 import SortingForm from '../sorting-form/sorting-form';
@@ -20,25 +17,12 @@ import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getOffers } from '../../store/offers-data/selectors';
 import { getCurrentCity, getCurrentSortOption } from '../../store/app-process/selectors';
 
-const mapStateToProps = (state: State) => ({
-  currentCity: getCurrentCity(state),
-  offers: getOffers(state),
-  currentSortingOption: getCurrentSortOption(state),
-  authorizationStatus: getAuthorizationStatus(state),
-});
+function MainScreen(): JSX.Element {
+  const currentCity = useSelector(getCurrentCity);
+  const offers = useSelector(getOffers);
+  const currentSortingOption = useSelector(getCurrentSortOption);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onCityClick(city: CityName) {
-    dispatch(changeCity(city));
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function MainScreen(props: PropsFromRedux): JSX.Element {
-  const { currentCity, offers, currentSortingOption, onCityClick, authorizationStatus } = props;
   const hasNoOffers = offers.length === 0;
   const cityOffers = offers.filter((offer) => offer.city.name === currentCity);
   const [firstCity] = cityOffers;
@@ -69,6 +53,10 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
 
   const onOfferCardLeave = () => {
     setSelectedCard(null);
+  };
+
+  const onCityClick = (city: CityName) => {
+    dispatch(changeCity(city));
   };
 
   switch (currentSortingOption) {
@@ -122,5 +110,4 @@ function MainScreen(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {MainScreen};
-export default connector(MainScreen);
+export default MainScreen;

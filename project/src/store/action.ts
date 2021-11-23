@@ -33,6 +33,13 @@ export const updateOffers = createAction(
   }),
 );
 
+export const updateOffer = createAction(
+  ActionType.UpdateOffer,
+  (offer: OfferType) => ({
+    payload: offer,
+  }),
+);
+
 export const requireAuthorization = createAction(
   ActionType.RequireAuthorization,
   (authStatus: AuthorizationStatus) => ({
@@ -97,6 +104,13 @@ export const loadFavoriteOffers = createAction(
 
 export const updateFavoriteOffers = createAction(
   ActionType.UpdateFavoriteOffers,
+  (offer: OfferType) => ({
+    payload: offer,
+  }),
+);
+
+export const updateOffersNear = createAction(
+  ActionType.UpdateOffersNear,
   (offer: OfferType) => ({
     payload: offer,
   }),

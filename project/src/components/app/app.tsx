@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-debugger */
 import { Switch, Route, Router as BrowserRouter } from 'react-router-dom';
-import {connect, ConnectedProps} from 'react-redux';
 import MainScreen from '../main-screen/main-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import SignInScreen from '../sign-in-screen/sign-in-screen';
@@ -10,23 +9,12 @@ import NotFoundScreen from '../not-found/not-found';
 import { AppRoute } from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
-import { State } from '../../types/state';
+import { useSelector } from 'react-redux';
 import browserHistory from '../../browser-history';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getIsDataLoaded, getOffers } from '../../store/offers-data/selectors';
+import { getIsDataLoaded } from '../../store/offers-data/selectors';
 
-const mapStateToProps = (state: State) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  isDataLoaded: getIsDataLoaded(state),
-  offers: getOffers(state),
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function App(props: PropsFromRedux): JSX.Element {
-  const { isDataLoaded } = props;
+function App(): JSX.Element {
+  const isDataLoaded = useSelector(getIsDataLoaded);
 
   if (!isDataLoaded) {
     return (
@@ -60,5 +48,4 @@ function App(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {App};
-export default connector(App);
+export default App;

@@ -2,49 +2,37 @@
 // import { OfferType } from '../../types/offer';
 import { useParams } from 'react-router-dom';
 import Review from '../review/review';
+import {useSelector, useDispatch} from 'react-redux';
 import CommentForm from '../comment-form/comment-form';
 import Header from '../header/header';
-import { OFFER_IMAGES_COUNT, AuthorizationStatus } from '../../const';
 import Map from '../map/map';
+import { useHistory } from 'react-router';
 import OffersList from '../offer-list/offer-list';
 import React, { useMemo, useEffect } from 'react';
 import { getRating } from '../../utils';
-import { State } from '../../types/state';
-import { ThunkAppDispatch } from '../../types/action';
-import { fetchReviewsAction, fetchOffersNear, fetchOffer } from '../../store/api-actions';
-import {connect, ConnectedProps} from 'react-redux';
+import { fetchReviewsAction, fetchOffersNear, fetchOffer, toggleFavoriteStatus } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found/not-found';
-import { REVIEWS_COUNT, CardType } from '../../const';
+import { REVIEWS_COUNT, CardType, AppRoute, OFFER_IMAGES_COUNT, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getOffer, getOffersNear, getIsDataLoaded, getIsOffersNearLoaded, getIsOfferLoading, getIsOfferError } from '../../store/offers-data/selectors';
+import { getOffer, getOffersNear, getIsOffersNearLoaded, getIsOfferLoading, getIsOfferError } from '../../store/offers-data/selectors';
 import { getReviews, getIsReviewsLoaded } from '../../store/reviews-process/selectors';
+import { updateOffer } from '../../store/action';
 
-const mapStateToProps = (state: State) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  isDataLoaded: getIsDataLoaded(state),
-  offer: getOffer(state),
-  reviews: getReviews(state),
-  offersNear: getOffersNear(state),
-  isReviewsLoaded: getIsReviewsLoaded(state),
-  isOffersNearLoaded: getIsOffersNearLoaded(state),
-  isOfferLoading: getIsOfferLoading(state),
-  isOfferError: getIsOfferError(state),
-});
+function RoomScreen(): JSX.Element {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const offer = useSelector(getOffer);
+  const reviews = useSelector(getReviews);
+  const offersNear = useSelector(getOffersNear);
+  const isReviewsLoaded = useSelector(getIsReviewsLoaded);
+  const isOffersNearLoaded = useSelector(getIsOffersNearLoaded);
+  const isOfferLoading = useSelector(getIsOfferLoading);
+  const isOfferError = useSelector(getIsOfferError);
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  handleFetchReviews: (id: string) => dispatch(fetchReviewsAction(id)),
-  handleFetchOffersNear: (id: string) => dispatch(fetchOffersNear(id)),
-  handleFetchOffer: (id: string) => dispatch(fetchOffer(id)),
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function RoomScreen(props: PropsFromRedux): JSX.Element {
-  const { authorizationStatus, isOfferLoading, reviews, offersNear, offer, isReviewsLoaded, isOffersNearLoaded, isOfferError, handleFetchReviews, handleFetchOffersNear, handleFetchOffer } = props;
   const { id } = useParams<{ id: string }>();
+
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const pointsNear = offersNear.map((offerNear) => (
     {
@@ -54,10 +42,10 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
   ));
 
   useEffect(() => {
-    handleFetchReviews(id);
-    handleFetchOffersNear(id);
-    handleFetchOffer(id);
-  },[handleFetchReviews, handleFetchOffersNear, handleFetchOffer, id]);
+    dispatch(fetchReviewsAction(id));
+    dispatch(fetchOffersNear(id));
+    dispatch(fetchOffer(id));
+  },[dispatch, id]);
 
   const reviewsRecieved = useMemo(() =>
     [...reviews]
@@ -83,7 +71,24 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
         goods,
         host,
         description,
+        isFavorite,
       } = offer;
+
+      const handleFavoriteClick = () => {
+        if (authorizationStatus !== AuthorizationStatus.Auth) {
+          history.push(AppRoute.SignIn);
+          return;
+        }
+        if (offer) {
+          dispatch(toggleFavoriteStatus(
+            offer.id,
+            offer.isFavorite,
+            (updatedOffer) => {
+              dispatch(updateOffer(updatedOffer));
+            },
+          ));
+        }
+      };
 
       return (
         <React.Fragment>
@@ -110,7 +115,7 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
                   <h1 className="property__name">
                     { title }
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button className={`property__bookmark-button button ${isFavorite ? 'property__bookmark-button--active' : ''}`} type="button" onClick={handleFavoriteClick}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -219,5 +224,4 @@ function RoomScreen(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {RoomScreen};
-export default connector(RoomScreen);
+export default RoomScreen;

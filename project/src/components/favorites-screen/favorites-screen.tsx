@@ -3,28 +3,18 @@ import Header from '../header/header';
 import { Link } from 'react-router-dom';
 import { CardType, AppRoute, CityName } from '../../const';
 import { getOffersFavorite, getIsOffersFavoriteLoaded } from '../../store/favorites-data/selectors';
-import { State } from '../../types/state';
-import {connect, ConnectedProps} from 'react-redux';
 import { toggleFavoriteStatus, fetchFavorites } from '../../store/api-actions';
 import { updateFavoriteOffers, changeCity } from '../../store/action';
-import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import LoadingScreen from '../loading-screen/loading-screen';
 import FavoritesEmptyScreen from './favorites-screen-empty';
 import OffersList from '../offer-list/offer-list';
 
-const mapStateToProps = (state: State) => ({
-  offersFavorite: getOffersFavorite(state),
-  isOffersFavoriteLoaded: getIsOffersFavoriteLoaded(state),
-});
-
-const connector = connect(mapStateToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function FavoritesScreen(props: PropsFromRedux): JSX.Element {
-  const { offersFavorite, isOffersFavoriteLoaded } = props;
-  console.log(offersFavorite);
+function FavoritesScreen(): JSX.Element {
+  const offersInitialFavorite = useSelector(getOffersFavorite);
+  const offersFavorite = offersInitialFavorite.filter((offer) => offer.isFavorite);
+  const isOffersFavoriteLoaded = useSelector(getIsOffersFavoriteLoaded);
 
   const hasNoOffersFavorite = offersFavorite.length === 0;
   const placies = [...new Set(offersFavorite.map((offer) => offer.city.name))];
@@ -106,5 +96,4 @@ function FavoritesScreen(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {FavoritesScreen};
-export default connector(FavoritesScreen);
+export default FavoritesScreen;

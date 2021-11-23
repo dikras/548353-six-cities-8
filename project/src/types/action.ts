@@ -13,6 +13,8 @@ export enum ActionType {
   ChangeSorting = 'main/changeSorting',
   LoadOffers = 'data/loadOffers',
   UpdateOffers = 'data/updateOffers',
+  UpdateOffersNear = 'data/updateOfferNear',
+  UpdateOffer = 'data/updateOffer',
   RequireAuthorization = 'user/requireAuthorization',
   UserLogin = 'user/login',
   LoadOffer = 'data/loadOffer',
