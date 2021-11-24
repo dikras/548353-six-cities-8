@@ -201,6 +201,7 @@ function RoomScreen(): JSX.Element {
                   <OffersList
                     offers={offersNear}
                     cardType={CardType.Near}
+                    onFavoriteClick={handleFavoriteClick}
                   />
                 </div>
               </section>

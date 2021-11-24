@@ -1,40 +1,50 @@
 import Header from '../header/header';
 import {useRef, FormEvent} from 'react';
-import {connect, ConnectedProps} from 'react-redux';
-import {loginAction} from '../../store/api-actions';
-import {ThunkAppDispatch} from '../../types/action';
-import {AuthData} from '../../types/auth-data';
-import { State } from '../../types/state';
+import { loginAction } from '../../store/api-actions';
 import { getCurrentCity } from '../../store/app-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { AuthorizationStatus, AppRoute, CityName } from '../../const';
+import { Redirect } from 'react-router';
+import { validateEmail, validatePassword } from '../../utils';
+import { Link } from 'react-router-dom';
+import { changeCity } from '../../store/action';
 
-const mapStateToProps = (state: State) => ({
-  currentCity: getCurrentCity(state),
-});
-
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  onSubmit(authData: AuthData) {
-    dispatch(loginAction(authData));
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function SignInScreen(props: PropsFromRedux): JSX.Element {
-  const {currentCity, onSubmit} = props;
+function SignInScreen(): JSX.Element {
+  const currentCity = useSelector(getCurrentCity);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+  const dispatch = useDispatch();
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Redirect to={AppRoute.Main}/>;
+  }
+
+  const handleChangeCity = (city: CityName) => {
+    dispatch(changeCity(city));
+  };
+
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+    if (loginRef.current && passwordRef.current) {
+      dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value,
-      });
+      }));
+    }
+  };
+
+  const handleInputChange = (evt: FormEvent<HTMLFormElement>) => {
+    if (evt.target === loginRef.current) {
+      loginRef.current.setCustomValidity(validateEmail(loginRef.current.value));
+      loginRef.current.reportValidity();
+    }
+    if (evt.target === passwordRef.current) {
+      passwordRef.current.setCustomValidity(validatePassword(passwordRef.current.value));
+      passwordRef.current.reportValidity();
     }
   };
 
@@ -51,6 +61,7 @@ function SignInScreen(props: PropsFromRedux): JSX.Element {
               action="#"
               method="post"
               onSubmit={handleSubmit}
+              onChange={handleInputChange}
             >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
@@ -79,9 +90,15 @@ function SignInScreen(props: PropsFromRedux): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#/">
+              <Link
+                to={AppRoute.Main}
+                className="locations__item-link" href="#/"
+                onClick={() => {
+                  handleChangeCity(currentCity);
+                }}
+              >
                 <span>{currentCity}</span>
-              </a>
+              </Link>
             </div>
           </section>
         </div>
@@ -90,5 +107,4 @@ function SignInScreen(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {SignInScreen};
-export default connector(SignInScreen);
+export default SignInScreen;
