@@ -1,4 +1,4 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { AppProcess } from '../../types/state';
 import { CityName, SortingType } from '../../const';
 import { changeCity, changeSorting } from '../action';

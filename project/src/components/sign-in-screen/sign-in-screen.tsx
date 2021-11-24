@@ -1,5 +1,5 @@
 import Header from '../header/header';
-import {useRef, FormEvent} from 'react';
+import { useRef, FormEvent } from 'react';
 import { loginAction } from '../../store/api-actions';
 import { getCurrentCity } from '../../store/app-process/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
@@ -50,7 +50,7 @@ function SignInScreen(): JSX.Element {
 
   return (
     <div className="page page--gray page--login">
-      <Header isMainScreen={false} isSigninScreen={false} />
+      <Header isMainScreen={false} isSigninScreen />
 
       <main className="page__main page__main--login">
         <div className="page__login-container container">

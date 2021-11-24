@@ -1,4 +1,4 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { OffersData } from '../../types/state';
 import { loadOffers, loadOffer, loadOffersNear, loadOfferFull, loadOfferError } from '../action';
 

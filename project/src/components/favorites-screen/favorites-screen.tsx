@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import Header from '../header/header';
 import { Link } from 'react-router-dom';
 import { CardType, AppRoute, CityName } from '../../const';
@@ -73,7 +72,7 @@ function FavoritesScreen(): JSX.Element {
                   </div>
                 </li>
               );
-            })};
+            })}
           </ul>
         </section>}
     </div>

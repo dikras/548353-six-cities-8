@@ -1,5 +1,5 @@
-import {createReducer} from '@reduxjs/toolkit';
-import {  ReviewsProcess } from '../../types/state';
+import { createReducer } from '@reduxjs/toolkit';
+import { ReviewsProcess } from '../../types/state';
 import { ReviewStatus } from '../../const';
 import { loadReviews, postReview } from '../action';
 

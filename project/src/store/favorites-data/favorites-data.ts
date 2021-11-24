@@ -1,4 +1,4 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { FavoriteOffersData } from '../../types/state';
 import { loadFavoriteOffers, updateFavoriteOffers } from '../action';
 

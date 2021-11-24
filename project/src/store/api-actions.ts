@@ -12,12 +12,12 @@ import {loadOffers,
   postReview,
   loadFavoriteOffers
 } from './action';
-import {saveToken, dropToken} from '../services/token';
-import {APIRoute, AppRoute, WarningMessage, ReviewStatus} from '../const';
-import {OfferServerType, OfferType} from '../types/offer';
-import {AuthData} from '../types/auth-data';
-import {UserServerType} from '../types/user';
-import {adaptOfferToClent, adaptUserToClient, adaptReviewToClient } from '../utils';
+import { saveToken, dropToken } from '../services/token';
+import { APIRoute, AppRoute, WarningMessage, ReviewStatus } from '../const';
+import { OfferServerType, OfferType } from '../types/offer';
+import { AuthData } from '../types/auth-data';
+import { UserServerType } from '../types/user';
+import { adaptOfferToClent, adaptUserToClient, adaptReviewToClient } from '../utils';
 import {toast} from 'react-toastify';
 import { ReviewServerType, ReviewPostType } from '../types/review';
 

@@ -1,6 +1,6 @@
-import {NameSpace} from '../root-reducer';
-import {State} from '../../types/state';
-import {ReviewStatus} from '../../const';
+import { NameSpace } from '../root-reducer';
+import { State } from '../../types/state';
+import { ReviewStatus } from '../../const';
 import { ReviewsType } from '../../types/review';
 
 export const getReviews = (state: State): ReviewsType => state[NameSpace.reviews].reviews;

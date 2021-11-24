@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
-import {useRef, useEffect} from 'react';
-import {Icon, LayerGroup, Marker} from 'leaflet';
+import { useRef, useEffect } from 'react';
+import { Icon, LayerGroup, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
-import {City, Points} from '../../types/map-points';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, IconSize} from '../../const';
+import { City, Points } from '../../types/map-points';
+import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT, IconSize } from '../../const';
 import { OfferType } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
 

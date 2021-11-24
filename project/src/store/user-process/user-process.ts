@@ -1,4 +1,4 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { UserProcess } from '../../types/state';
 import { AuthorizationStatus } from '../../const';
 import { userLogin, userLogout } from '../action';

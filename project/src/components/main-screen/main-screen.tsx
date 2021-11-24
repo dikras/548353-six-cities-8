@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-debugger */
 import { useState } from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import OffersList from '../offer-list/offer-list';

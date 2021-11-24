@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OfferType } from '../../types/offer';
 import { Link } from 'react-router-dom';
 import { CardType, CardImageSize } from '../../const';

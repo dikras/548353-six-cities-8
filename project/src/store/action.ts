@@ -109,9 +109,3 @@ export const updateFavoriteOffers = createAction(
   }),
 );
 
-export const updateOffersNear = createAction(
-  ActionType.UpdateOffersNear,
-  (offer: OfferType) => ({
-    payload: offer,
-  }),
-);

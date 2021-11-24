@@ -1,6 +1,5 @@
-import {Route, Redirect} from 'react-router-dom';
-import {RouteProps} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { useSelector } from 'react-redux';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 

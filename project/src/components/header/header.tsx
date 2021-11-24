@@ -1,7 +1,7 @@
-import {Link} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../const';
-import {useSelector, useDispatch} from 'react-redux';
-import {logoutAction} from '../../store/api-actions';
+import { Link } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutAction } from '../../store/api-actions';
 import Logo from '../logo/logo';
 import React from 'react';
 import { getAuthorizationStatus, getUser } from '../../store/user-process/selectors';

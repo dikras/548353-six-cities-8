@@ -1,12 +1,7 @@
-import {Action} from 'redux';
-import {
-  ThunkAction,
-  ThunkDispatch
-} from 'redux-thunk';
-import {
-  AxiosInstance
-} from 'axios';
-import {State} from '../types/state';
+import { Action } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { AxiosInstance } from 'axios';
+import { State } from '../types/state';
 
 export enum ActionType {
   ChangeCity = 'main/changeCity',

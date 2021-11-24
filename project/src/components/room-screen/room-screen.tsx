@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
-// import { OfferType } from '../../types/offer';
 import { useParams } from 'react-router-dom';
 import Review from '../review/review';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CommentForm from '../comment-form/comment-form';
 import Header from '../header/header';
 import Map from '../map/map';
@@ -183,7 +181,7 @@ function RoomScreen(): JSX.Element {
                       {reviewsRecieved.map((review) => {
                         const keyValue = `${review.id}`;
                         return (
-                          <Review key={ keyValue } review={ review } />
+                          <Review key={keyValue} review={ review } />
                         );
                       })}
                     </ul> : <LoadingScreen />}
