@@ -10,8 +10,8 @@ import React, { useMemo, useEffect } from 'react';
 import { getRating } from '../../utils';
 import { fetchReviewsAction, fetchOffersNear, fetchOffer, toggleFavoriteStatus } from '../../store/api-actions';
 import LoadingScreen from '../loading-screen/loading-screen';
-import NotFoundScreen from '../not-found/not-found';
-import { REVIEWS_COUNT, CardType, AppRoute, OFFER_IMAGES_COUNT, AuthorizationStatus } from '../../const';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { DataCount, CardType, AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getOffer, getOffersNear, getIsOffersNearLoaded, getIsOfferLoading, getIsOfferError } from '../../store/offers-data/selectors';
 import { getReviews, getIsReviewsLoaded } from '../../store/reviews-process/selectors';
@@ -48,7 +48,7 @@ function RoomScreen(): JSX.Element {
   const reviewsRecieved = useMemo(() =>
     [...reviews]
       .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
-      .slice(0, REVIEWS_COUNT),
+      .slice(0, DataCount.REVIEWS),
   [reviews]);
 
   const renderOffer = () => {
@@ -93,7 +93,7 @@ function RoomScreen(): JSX.Element {
           <section className="property">
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {images.slice(0, OFFER_IMAGES_COUNT).map((image, index) => {
+                {images.slice(0, DataCount.OFFER_IMAGE).map((image, index) => {
                   const keyValue = `${index}-${image}`;
                   return (
                     <div key={keyValue} className="property__image-wrapper">
@@ -111,7 +111,7 @@ function RoomScreen(): JSX.Element {
                   </div> : ''}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
-                    { title }
+                    {title}
                   </h1>
                   <button className={`property__bookmark-button button ${isFavorite ? 'property__bookmark-button--active' : ''}`} type="button" onClick={handleFavoriteClick}>
                     <svg className="property__bookmark-icon" width="31" height="33">
@@ -122,24 +122,24 @@ function RoomScreen(): JSX.Element {
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
-                    <span style={{ width: `${getRating(rating)}%` }}></span>
+                    <span style={{width: `${getRating(rating)}%`}}></span>
                     <span className="visually-hidden">Rating</span>
                   </div>
-                  <span className="property__rating-value rating__value">{ rating }</span>
+                  <span className="property__rating-value rating__value">{rating}</span>
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    { type[0].toUpperCase() + type.slice(1) }
+                    {type[0].toUpperCase() + type.slice(1)}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
-                    { bedrooms } Bedrooms
+                    {bedrooms} Bedrooms
                   </li>
                   <li className="property__feature property__feature--adults">
-                    Max { maxAdults } adults
+                    Max {maxAdults} adults
                   </li>
                 </ul>
                 <div className="property__price">
-                  <b className="property__price-value">&euro;{ price }</b>
+                  <b className="property__price-value">&euro;{price}</b>
                   <span className="property__price-text">&nbsp;night</span>
                 </div>
                 <div className="property__inside">
@@ -159,10 +159,10 @@ function RoomScreen(): JSX.Element {
                   <h2 className="property__host-title">Meet the host</h2>
                   <div className="property__host-user user">
                     <div className={`property__avatar-wrapper user__avatar-wrapper ${host.isPro ? 'property__avatar-wrapper--pro' : ''}`}>
-                      <img className="property__avatar user__avatar" src={ host.avatarUrl } width="74" height="74" alt="Host avatar" />
+                      <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                     </div>
                     <span className="property__user-name">
-                      { host.name }
+                      {host.name}
                     </span>
                     <span className="property__user-status">
                       {host.isPro ? 'Pro' : ''}
@@ -170,7 +170,7 @@ function RoomScreen(): JSX.Element {
                   </div>
                   <div className="property__description">
                     <p className="property__text">
-                      { description }
+                      {description}
                     </p>
                   </div>
                 </div>

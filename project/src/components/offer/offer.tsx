@@ -47,14 +47,12 @@ function Offer(props: OfferProps): JSX.Element {
           <span>Premium</span>
         </div> : ''}
       <div className={`place-card__image-wrapper ${isCitiesCard ? 'cities__image-wrapper' : ''} ${isFavoriteCard ? 'favorites__image-wrapper' : ''}`}>
-        <Link to={`/offer/${offer.id}`} title="/offer/id">
-          <img className="place-card__image"
-            src={previewImage}
-            width={!isFavoriteCard ? CardImageSize.main.width : CardImageSize.favorite.width}
-            height={!isFavoriteCard ? CardImageSize.main.height : CardImageSize.favorite.height}
-            alt="Place"
-          />
-        </Link>
+        <img className="place-card__image"
+          src={previewImage}
+          width={!isFavoriteCard ? CardImageSize.main.width : CardImageSize.favorite.width}
+          height={!isFavoriteCard ? CardImageSize.main.height : CardImageSize.favorite.height}
+          alt="Place"
+        />
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

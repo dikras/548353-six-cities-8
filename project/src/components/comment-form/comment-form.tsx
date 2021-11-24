@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ReviewStatus, ratingStars, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
+import { ReviewStatus, RATING_STARS, CommentLength } from '../../const';
 import { uploadReview } from '../../store/api-actions';
 import { getReviewsStatus } from '../../store/reviews-process/selectors';
 
@@ -17,7 +17,7 @@ function CommentForm(props: CommentFormProps): JSX.Element {
 
   const [comment, setUserComment] = useState('');
   const [rating, setUserRating] = useState(0);
-  const isFormComplete = comment.length > MIN_COMMENT_LENGTH && rating > 0;
+  const isFormComplete = comment.length > CommentLength.MIN && rating > 0;
 
   const dispatch = useDispatch();
 
@@ -52,7 +52,7 @@ function CommentForm(props: CommentFormProps): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {ratingStars.map(({description, value, starId}) => (
+        {RATING_STARS.map(({description, value, starId}) => (
           <React.Fragment key={`${value}`}>
             <input
               className="form__rating-input visually-hidden"
@@ -77,7 +77,7 @@ function CommentForm(props: CommentFormProps): JSX.Element {
         id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleCommentFieldChange}
-        maxLength={MAX_COMMENT_LENGTH}
+        maxLength={CommentLength.MAX}
         value={comment}
         disabled={isReviewUploading}
       />

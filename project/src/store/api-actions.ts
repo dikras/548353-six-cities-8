@@ -13,7 +13,7 @@ import {loadOffers,
   loadFavoriteOffers
 } from './action';
 import { saveToken, dropToken } from '../services/token';
-import { APIRoute, AppRoute, WarningMessage, ReviewStatus } from '../const';
+import { APIRoute, AppRoute, WarningMessage, ReviewStatus, SERVER_RESPONSE_OK } from '../const';
 import { OfferServerType, OfferType } from '../types/offer';
 import { AuthData } from '../types/auth-data';
 import { UserServerType } from '../types/user';
@@ -31,7 +31,7 @@ export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     try {
       const response = await api.get(APIRoute.Login);
-      if (response.status === 200) {
+      if (response.status === SERVER_RESPONSE_OK) {
         dispatch(userLogin(adaptUserToClient(response.data)));
       }
     } catch {

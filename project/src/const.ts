@@ -43,20 +43,24 @@ export const CardImageSize = {
   },
 };
 
+export const DataCount = {
+  OFFER_IMAGE: 6,
+  REVIEWS: 10,
+};
+
 export const RATING_TO_CALC = 20;
 
-export const OFFER_IMAGES_COUNT = 6;
+export const SERVER_RESPONSE_OK = 200;
 
-export const OFFERS_NEARBY_COUNT = 3;
+export const UrlMarker = {
+  DEFAULT: '../../img/pin.svg',
+  CURRENT: '../../img/pin-active.svg',
+};
 
-export const REVIEWS_COUNT = 10;
-
-export const URL_MARKER_DEFAULT = '../../img/pin.svg';
-
-export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
-
-export const MIN_COMMENT_LENGTH = 50;
-export const MAX_COMMENT_LENGTH = 300;
+export const CommentLength = {
+  MIN: 50,
+  MAX: 300,
+};
 
 export enum CityName {
   Paris = 'Paris',
@@ -89,7 +93,7 @@ export enum ReviewStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const ratingStars = [
+export const RATING_STARS = [
   {
     description: 'perfect',
     value: 5,
