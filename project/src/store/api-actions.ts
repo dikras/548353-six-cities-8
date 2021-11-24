@@ -1,11 +1,23 @@
 import {ThunkActionResult} from '../types/action';
-import {loadOffers, updateOffers, loadOffersNear, redirectToRoute, userLogout, userLogin, loadReviews, loadOffer, loadOfferFull, loadOfferError, postReview} from './action';
-import {saveToken, dropToken} from '../services/token';
-import {APIRoute, AppRoute, WarningMessage, ReviewStatus} from '../const';
-import {OfferServerType, OfferType} from '../types/offer';
-import {AuthData} from '../types/auth-data';
-import {UserServerType} from '../types/user';
-import {adaptOfferToClent, adaptUserToClient, adaptReviewToClient } from '../utils';
+import {loadOffers,
+  updateOffers,
+  loadOffersNear,
+  redirectToRoute,
+  userLogout,
+  userLogin,
+  loadReviews,
+  loadOffer,
+  loadOfferFull,
+  loadOfferError,
+  postReview,
+  loadFavoriteOffers
+} from './action';
+import { saveToken, dropToken } from '../services/token';
+import { APIRoute, AppRoute, WarningMessage, ReviewStatus, SERVER_RESPONSE_OK } from '../const';
+import { OfferServerType, OfferType } from '../types/offer';
+import { AuthData } from '../types/auth-data';
+import { UserServerType } from '../types/user';
+import { adaptOfferToClent, adaptUserToClient, adaptReviewToClient } from '../utils';
 import {toast} from 'react-toastify';
 import { ReviewServerType, ReviewPostType } from '../types/review';
 
@@ -19,7 +31,7 @@ export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
     try {
       const response = await api.get(APIRoute.Login);
-      if (response.status === 200) {
+      if (response.status === SERVER_RESPONSE_OK) {
         dispatch(userLogin(adaptUserToClient(response.data)));
       }
     } catch {
@@ -89,4 +101,10 @@ export const toggleFavoriteStatus = (id: number, isFavorite: boolean, onUpdate?:
     const {data} = await api.post<OfferServerType>(`${APIRoute.Favorites}/${id}/${Number(!isFavorite)}`);
     dispatch(updateOffers(adaptOfferToClent(data)));
     onUpdate && onUpdate(adaptOfferToClent(data));
+  };
+
+export const fetchFavorites = (): ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    const {data} = await api.get<OfferServerType[]>(APIRoute.Favorites);
+    dispatch(loadFavoriteOffers(data.map((offer) => adaptOfferToClent(offer))));
   };

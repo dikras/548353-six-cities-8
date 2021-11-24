@@ -1,6 +1,6 @@
-import {NameSpace} from '../root-reducer';
-import {State} from '../../types/state';
-import {OfferType, OffersType} from '../../types/offer';
+import { NameSpace } from '../root-reducer';
+import { State } from '../../types/state';
+import { OfferType, OffersType } from '../../types/offer';
 
 export const getOffers = (state: State): OffersType => state[NameSpace.data].offers;
 export const getOffer = (state: State): OfferType | null => state[NameSpace.data].offer;

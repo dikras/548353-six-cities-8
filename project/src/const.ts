@@ -26,20 +26,41 @@ export const IconSize = {
   ANCHOR_HEIGHT: 40,
 };
 
+export enum CardType {
+  City = 'CITY',
+  Near ='NEAR',
+  Favorite ='FAVORITE',
+}
+
+export const CardImageSize = {
+  main: {
+    height: '200',
+    width: '260',
+  },
+  favorite: {
+    height: '110',
+    width: '150',
+  },
+};
+
+export const DataCount = {
+  OFFER_IMAGE: 6,
+  REVIEWS: 10,
+};
+
 export const RATING_TO_CALC = 20;
 
-export const OFFER_IMAGES_COUNT = 6;
+export const SERVER_RESPONSE_OK = 200;
 
-export const OFFERS_NEARBY_COUNT = 3;
+export const UrlMarker = {
+  DEFAULT: '../../img/pin.svg',
+  CURRENT: '../../img/pin-active.svg',
+};
 
-export const REVIEWS_COUNT = 10;
-
-export const URL_MARKER_DEFAULT = '../../img/pin.svg';
-
-export const URL_MARKER_CURRENT = '../../img/pin-active.svg';
-
-export const MIN_COMMENT_LENGTH = 50;
-export const MAX_COMMENT_LENGTH = 300;
+export const CommentLength = {
+  MIN: 50,
+  MAX: 300,
+};
 
 export enum CityName {
   Paris = 'Paris',
@@ -72,30 +93,30 @@ export enum ReviewStatus {
   Unknown = 'UNKNOWN',
 }
 
-export const ratingStars = [
+export const RATING_STARS = [
   {
-    title: 'perfect',
+    description: 'perfect',
     value: 5,
-    id: '5-stars',
+    starId: '5stars',
   },
   {
-    title: 'good',
+    description: 'good',
     value: 4,
-    id: '4-stars',
+    starId: '4stars',
   },
   {
-    title: 'not bad',
+    description: 'not bad',
     value: 3,
-    id: '3-stars',
+    starId: '3stars',
   },
   {
-    title: 'badly',
+    description: 'badly',
     value: 2,
-    id: '2-stars',
+    starId: '2stars',
   },
   {
-    title: 'terribly',
+    description: 'terribly',
     value: 1,
-    id: '1-star',
+    starId: '1star',
   },
 ];

@@ -1,9 +1,8 @@
-/* eslint-disable no-console */
-import {useRef, useEffect} from 'react';
-import {Icon, LayerGroup, Marker} from 'leaflet';
+import { useRef, useEffect } from 'react';
+import { Icon, LayerGroup, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
-import {City, Points} from '../../types/map-points';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT, IconSize} from '../../const';
+import { City, Points } from '../../types/map-points';
+import { UrlMarker, IconSize } from '../../const';
 import { OfferType } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
 
@@ -14,13 +13,13 @@ type MapProps = {
 };
 
 const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: UrlMarker.DEFAULT,
   iconSize: [IconSize.CUSTOM_WIDTH, IconSize.CUSTOM_HEIGHT],
   iconAnchor: [IconSize.ANCHOR_WIDTH, IconSize.ANCHOR_HEIGHT],
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: UrlMarker.CURRENT,
   iconSize: [IconSize.CUSTOM_WIDTH, IconSize.CUSTOM_HEIGHT],
   iconAnchor: [IconSize.ANCHOR_WIDTH, IconSize.ANCHOR_HEIGHT],
 });
@@ -54,6 +53,8 @@ function Map(props: MapProps): JSX.Element {
             (selectedPoint?.location.latitude === point.lat &&
               selectedPoint?.location.longitude === point.lng) ? currentCustomIcon : defaultCustomIcon)
           .addTo(markerGroup.current as LayerGroup);
+
+
       });
     }
   }, [map, city, points, selectedPoint]);

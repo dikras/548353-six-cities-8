@@ -1,9 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import {connect, ConnectedProps} from 'react-redux';
-import {ThunkAppDispatch} from '../../types/action';
-import { State } from '../../types/state';
-import { ReviewPostType } from '../../types/review';
-import { ReviewStatus, ratingStars, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
+import { useSelector, useDispatch } from 'react-redux';
+import { ReviewStatus, RATING_STARS, CommentLength } from '../../const';
 import { uploadReview } from '../../store/api-actions';
 import { getReviewsStatus } from '../../store/reviews-process/selectors';
 
@@ -11,27 +8,18 @@ type CommentFormProps = {
   id: string,
 }
 
-const mapStateToProps = (state: State) => ({
-  isReviewUploading: getReviewsStatus(state) === ReviewStatus.Uploading,
-  isReviewUploaded: getReviewsStatus(state) === ReviewStatus.Uploaded,
-  isReviewNotUploaded: getReviewsStatus(state) === ReviewStatus.NotUploaded,
-});
+function CommentForm(props: CommentFormProps): JSX.Element {
+  const isReviewUploading = useSelector(getReviewsStatus) === ReviewStatus.Uploading;
+  const isReviewUploaded = useSelector(getReviewsStatus) === ReviewStatus.Uploaded;
+  const isReviewNotUploaded = useSelector(getReviewsStatus) === ReviewStatus.NotUploaded;
 
-const mapDispatchToProps = (dispatch: ThunkAppDispatch) => ({
-  handlePostReview(review: ReviewPostType, id: string) {
-    dispatch(uploadReview(review, id));
-  },
-});
+  const { id } = props;
 
-const connector = connect(mapStateToProps, mapDispatchToProps);
-type PropsFromRedux = ConnectedProps<typeof connector>;
-type ConnectedComponentProps = CommentFormProps & PropsFromRedux;
-
-function CommentForm(props: ConnectedComponentProps): JSX.Element {
-  const { id, handlePostReview, isReviewNotUploaded, isReviewUploading, isReviewUploaded } = props;
   const [comment, setUserComment] = useState('');
-  const [rating, setUserRating] = useState('');
-  const isFormComplete = comment.length > MIN_COMMENT_LENGTH;
+  const [rating, setUserRating] = useState(0);
+  const isFormComplete = comment.length > CommentLength.MIN && rating > 0;
+
+  const dispatch = useDispatch();
 
   const handleCommentFieldChange = ({target}: ChangeEvent<HTMLTextAreaElement>) => {
     const value = target.value;
@@ -40,17 +28,17 @@ function CommentForm(props: ConnectedComponentProps): JSX.Element {
 
   const handleRatingChange = ({target}: ChangeEvent<HTMLInputElement>) => {
     const value = target.value;
-    setUserRating(value);
+    setUserRating(Number(value));
   };
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    handlePostReview({comment, rating: Number(rating)}, id);
+    dispatch(uploadReview({comment, rating}, id));
   };
 
   useEffect(() => {
     if (isReviewUploaded) {
-      setUserRating('');
+      setUserRating(0);
       setUserComment('');
     }
   }, [isReviewUploaded]);
@@ -64,19 +52,19 @@ function CommentForm(props: ConnectedComponentProps): JSX.Element {
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {ratingStars.map((star) => (
-          <React.Fragment key={`${star.value}`}>
+        {RATING_STARS.map(({description, value, starId}) => (
+          <React.Fragment key={`${value}`}>
             <input
               className="form__rating-input visually-hidden"
               name="rating"
               type="radio"
-              value={`${star.value}`}
-              id={star.id}
-              checked={star.value === Number(rating)}
+              value={`${value}`}
+              id={starId}
+              checked={value === rating}
               onChange={handleRatingChange}
               disabled={isReviewUploading}
             />
-            <label htmlFor={star.id} className="reviews__rating-label form__rating-label" title={star.title}>
+            <label htmlFor={starId} className="reviews__rating-label form__rating-label" title={description}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>
               </svg>
@@ -89,7 +77,7 @@ function CommentForm(props: ConnectedComponentProps): JSX.Element {
         id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleCommentFieldChange}
-        maxLength={MAX_COMMENT_LENGTH}
+        maxLength={CommentLength.MAX}
         value={comment}
         disabled={isReviewUploading}
       />
@@ -103,5 +91,4 @@ function CommentForm(props: ConnectedComponentProps): JSX.Element {
   );
 }
 
-export {CommentForm};
-export default connector(CommentForm);
+export default CommentForm;

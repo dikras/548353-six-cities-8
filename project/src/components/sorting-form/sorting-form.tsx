@@ -1,30 +1,12 @@
-/* eslint-disable no-console */
-/* eslint-disable no-debugger */
 import { useState } from 'react';
 import { SortingType } from '../../const';
-import { Dispatch } from 'redux';
-import { connect, ConnectedProps } from 'react-redux';
-import { State } from '../../types/state';
-import { Actions } from '../../types/action';
+import { useSelector, useDispatch } from 'react-redux';
 import { changeSorting } from '../../store/action';
 import { getCurrentSortOption } from '../../store/app-process/selectors';
 
-const mapStateToProps = (state: State) => ({
-  currentSortingOption: getCurrentSortOption(state),
-});
-
-const mapDispatchToProps = (dispatch: Dispatch<Actions>) => ({
-  onSortingOptionClick(currentSortingOption: SortingType) {
-    dispatch(changeSorting(currentSortingOption));
-  },
-});
-
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-type PropsFromRedux = ConnectedProps<typeof connector>;
-
-function SortingForm(props: PropsFromRedux): JSX.Element {
-  const { currentSortingOption, onSortingOptionClick } = props;
+function SortingForm(): JSX.Element {
+  const currentSortingOption = useSelector(getCurrentSortOption);
+  const dispatch = useDispatch();
   const [isClicked, setClicked] = useState(false);
 
   return (
@@ -42,7 +24,7 @@ function SortingForm(props: PropsFromRedux): JSX.Element {
           return (
             <li className={`places__option ${currentSortingOption === sort ? 'places__option--active' : ''}`} tabIndex={0}
               key={keyValue}
-              onClick={() => onSortingOptionClick(sort)}
+              onClick={() => dispatch(changeSorting(sort))}
             >{sort}
             </li>
           );
@@ -52,5 +34,4 @@ function SortingForm(props: PropsFromRedux): JSX.Element {
   );
 }
 
-export {SortingForm};
-export default connector(SortingForm);
+export default SortingForm;

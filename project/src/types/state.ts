@@ -2,7 +2,7 @@ import { OffersType, OfferType } from './offer';
 import { AuthorizationStatus, ReviewStatus, CityName, SortingType } from '../const';
 import { User } from './user';
 import { ReviewsType } from './review';
-import {  RootState } from '../store/root-reducer';
+import { RootState } from '../store/root-reducer';
 
 export type AppProcess = {
   currentCity: CityName,
@@ -29,6 +29,11 @@ export type ReviewsProcess = {
   reviewStatus: ReviewStatus,
   isReviewsLoaded: boolean,
   isPostReviewError: boolean,
+};
+
+export type FavoriteOffersData = {
+  offersFavorite: OffersType;
+  isOffersFavoriteLoaded: boolean;
 };
 
 export type State = RootState;

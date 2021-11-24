@@ -3,70 +3,109 @@ import { OffersType, OfferType } from '../types/offer';
 import { AppRoute, AuthorizationStatus, ReviewStatus, CityName, SortingType } from '../const';
 import { User } from '../types/user';
 import { ReviewsType } from '../types/review';
+import {createAction} from '@reduxjs/toolkit';
 
-export const changeCity = (city: CityName) => ({
-  type: ActionType.ChangeCity,
-  payload: city,
-} as const);
+export const changeCity = createAction(
+  ActionType.ChangeCity,
+  (city: CityName) => ({
+    payload: city,
+  }),
+);
 
-export const changeSorting = (sortingType: SortingType) => ({
-  type: ActionType.ChangeSorting,
-  payload: sortingType,
-} as const);
+export const changeSorting = createAction(
+  ActionType.ChangeSorting,
+  (sortingType: SortingType) => ({
+    payload: sortingType,
+  }),
+);
 
-export const loadOffers = (offers: OffersType) => ({
-  type: ActionType.LoadOffers,
-  payload: offers,
-} as const);
+export const loadOffers = createAction(
+  ActionType.LoadOffers,
+  (offers: OffersType) => ({
+    payload: offers,
+  }),
+);
 
-export const updateOffers = (offer: OfferType) => ({
-  type: ActionType.UpdateOffers,
-  payload: offer,
-} as const);
+export const updateOffers = createAction(
+  ActionType.UpdateOffers,
+  (offer: OfferType) => ({
+    payload: offer,
+  }),
+);
 
-export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
-  type: ActionType.RequireAuthorization,
-  payload: authStatus,
-} as const);
+export const updateOffer = createAction(
+  ActionType.UpdateOffer,
+  (offer: OfferType) => ({
+    payload: offer,
+  }),
+);
 
-export const userLogin = (user: User) => ({
-  type: ActionType.UserLogin,
-  payload: user,
-} as const);
+export const requireAuthorization = createAction(
+  ActionType.RequireAuthorization,
+  (authStatus: AuthorizationStatus) => ({
+    payload: authStatus,
+  }),
+);
 
-export const userLogout = () => ({
-  type: ActionType.UserLogout,
-} as const);
+export const userLogin = createAction(
+  ActionType.UserLogin,
+  (user: User) => ({
+    payload: user,
+  }),
+);
 
-export const redirectToRoute = (url: AppRoute) => ({
-  type: ActionType.RedirectToRoute,
-  payload: url,
-} as const);
+export const userLogout = createAction(ActionType.UserLogout);
 
-export const loadReviews = (reviews: ReviewsType) => ({
-  type: ActionType.LoadReviews,
-  payload: reviews,
-} as const);
+export const redirectToRoute = createAction(
+  ActionType.RedirectToRoute,
+  (url: AppRoute) => ({
+    payload: url,
+  }),
+);
 
-export const loadOffersNear = (offers: OffersType) => ({
-  type: ActionType.LoadOffersNear,
-  payload: offers,
-} as const);
+export const loadReviews = createAction(
+  ActionType.LoadReviews,
+  (reviews: ReviewsType) => ({
+    payload: reviews,
+  }),
+);
 
-export const loadOffer = () => ({
-  type: ActionType.LoadOffer,
-} as const);
+export const loadOffersNear = createAction(
+  ActionType.LoadOffersNear,
+  (offers: OffersType) => ({
+    payload: offers,
+  }),
+);
 
-export const loadOfferFull = (offer: OfferType) => ({
-  type: ActionType.LoadOfferFull,
-  payload: offer,
-} as const);
+export const loadOffer = createAction(ActionType.LoadOffer);
 
-export const loadOfferError = () => ({
-  type: ActionType.LoadOfferError,
-} as const);
+export const loadOfferFull = createAction(
+  ActionType.LoadOfferFull,
+  (offer: OfferType) => ({
+    payload: offer,
+  }),
+);
 
-export const postReview = (postReviewStatus: ReviewStatus) => ({
-  type: ActionType.PostReview,
-  payload: postReviewStatus,
-} as const);
+export const loadOfferError = createAction(ActionType.LoadOfferError);
+
+export const postReview = createAction(
+  ActionType.PostReview,
+  (postReviewStatus: ReviewStatus) => ({
+    payload: postReviewStatus,
+  }),
+);
+
+export const loadFavoriteOffers = createAction(
+  ActionType.LoadFavoriteOffers,
+  (offers: OffersType) => ({
+    payload: offers,
+  }),
+);
+
+export const updateFavoriteOffers = createAction(
+  ActionType.UpdateFavoriteOffers,
+  (offer: OfferType) => ({
+    payload: offer,
+  }),
+);
+

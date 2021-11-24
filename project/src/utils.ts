@@ -67,3 +67,22 @@ export const getRating = (rating: number): number => {
 };
 
 export const getDate = (date: string, format: string): string => dayjs(date).format(format);
+
+export const validateEmail = (email: string): string => {
+  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (!emailRegex.test(email)) {
+    return 'Please enter a valid email';
+  }
+  return '';
+};
+
+export const validatePassword = (password: string): string => {
+  const passwordRegex = /(?=.*[A-Za-z])(?=.*[0-9])[A-Za-z0-9]+/;
+  if (password.includes(' ')) {
+    return 'Spaces are not allowed';
+  }
+  if (!passwordRegex.test(password)) {
+    return 'Password must contain at least one letter and a number';
+  }
+  return '';
+};
