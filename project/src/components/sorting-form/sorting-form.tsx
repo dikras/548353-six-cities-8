@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SortingType } from '../../const';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeSorting } from '../../store/action';
-import { getCurrentSortOption } from '../../store/app-process/selectors';
+import { getCurrentSortOption } from '../../store/app-reducer/selectors';
 
 function SortingForm(): JSX.Element {
   const currentSortingOption = useSelector(getCurrentSortOption);

@@ -1,7 +1,7 @@
 import Header from '../header/header';
 import { Link } from 'react-router-dom';
 import { CardType, AppRoute, CityName } from '../../const';
-import { getOffersFavorite, getIsOffersFavoriteLoaded } from '../../store/favorites-data/selectors';
+import { getOffersFavorite, getPlaces, getIsOffersFavoriteLoaded } from '../../store/favorites-reducer/selectors';
 import { toggleFavoriteStatus, fetchFavorites } from '../../store/api-actions';
 import { updateFavoriteOffers, changeCity } from '../../store/action';
 import { useEffect } from 'react';
@@ -11,12 +11,11 @@ import FavoritesEmptyScreen from './favorites-screen-empty';
 import OffersList from '../offer-list/offer-list';
 
 function FavoritesScreen(): JSX.Element {
-  const offersInitialFavorite = useSelector(getOffersFavorite);
-  const offersFavorite = offersInitialFavorite.filter((offer) => offer.isFavorite);
+  const offersFavorite = useSelector(getOffersFavorite);
   const isOffersFavoriteLoaded = useSelector(getIsOffersFavoriteLoaded);
+  const places = useSelector(getPlaces);
 
   const hasNoOffersFavorite = offersFavorite.length === 0;
-  const placies = [...new Set(offersFavorite.map((offer) => offer.city.name))];
 
   const dispatch = useDispatch();
 
@@ -45,7 +44,7 @@ function FavoritesScreen(): JSX.Element {
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
           <ul className="favorites__list">
-            {placies.map((place, id) => {
+            {places.map((place, id) => {
               const cityOffers = offersFavorite.filter((offer) => offer.city.name === place);
               const keyValue = `${place}-${id}`;
               return (

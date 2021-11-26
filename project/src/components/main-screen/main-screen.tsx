@@ -11,9 +11,9 @@ import { OfferType } from '../../types/offer';
 import Header from '../header/header';
 import MainScreenEmpty from './main-screen-empty';
 import { toggleFavoriteStatus } from '../../store/api-actions';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getOffers } from '../../store/offers-data/selectors';
-import { getCurrentCity, getCurrentSortOption } from '../../store/app-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-reducer/selectors';
+import { getOffers } from '../../store/offers-reducer/selectors';
+import { getCurrentCity, getCurrentSortOption } from '../../store/app-reducer/selectors';
 
 function MainScreen(): JSX.Element {
   const currentCity = useSelector(getCurrentCity);

@@ -12,9 +12,9 @@ import { fetchReviewsAction, fetchOffersNear, fetchOffer, toggleFavoriteStatus }
 import LoadingScreen from '../loading-screen/loading-screen';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 import { DataCount, CardType, AppRoute, AuthorizationStatus } from '../../const';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { getOffer, getOffersNear, getIsOffersNearLoaded, getIsOfferLoading, getIsOfferError } from '../../store/offers-data/selectors';
-import { getReviews, getIsReviewsLoaded } from '../../store/reviews-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-reducer/selectors';
+import { getOffer, getOffersNear, getIsOffersNearLoaded, getIsOfferLoading, getIsOfferError } from '../../store/offers-reducer/selectors';
+import { getReviews, getIsReviewsLoaded } from '../../store/reviews-reducer/selectors';
 import { updateOffer } from '../../store/action';
 
 function RoomScreen(): JSX.Element {
@@ -189,7 +189,7 @@ function RoomScreen(): JSX.Element {
                 </section>
               </div>
             </div>
-            {isOffersNearLoaded ? <Map city={offer.city.location} points={pointsNear} selectedPoint={offer} /> : <LoadingScreen />}
+            {isOffersNearLoaded ? <Map city={offer.city.location} points={pointsNear} currentPoint={offer} /> : <LoadingScreen />}
           </section>
           {isOffersNearLoaded ?
             <div className="container">

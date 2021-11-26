@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logoutAction } from '../../store/api-actions';
 import Logo from '../logo/logo';
 import React from 'react';
-import { getAuthorizationStatus, getUser } from '../../store/user-process/selectors';
+import { getAuthorizationStatus, getUser } from '../../store/user-reducer/selectors';
 
 type HeaderProps = {
   isMainScreen: boolean;

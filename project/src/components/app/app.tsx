@@ -9,7 +9,7 @@ import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { useSelector } from 'react-redux';
 import browserHistory from '../../browser-history';
-import { getIsDataLoaded } from '../../store/offers-data/selectors';
+import { getIsDataLoaded } from '../../store/offers-reducer/selectors';
 
 function App(): JSX.Element {
   const isDataLoaded = useSelector(getIsDataLoaded);

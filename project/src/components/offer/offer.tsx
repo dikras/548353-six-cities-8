@@ -49,8 +49,8 @@ function Offer(props: OfferProps): JSX.Element {
       <div className={`place-card__image-wrapper ${isCitiesCard ? 'cities__image-wrapper' : ''} ${isFavoriteCard ? 'favorites__image-wrapper' : ''}`}>
         <img className="place-card__image"
           src={previewImage}
-          width={!isFavoriteCard ? CardImageSize.main.width : CardImageSize.favorite.width}
-          height={!isFavoriteCard ? CardImageSize.main.height : CardImageSize.favorite.height}
+          width={!isFavoriteCard ? CardImageSize.Main.Width : CardImageSize.Favorite.Width}
+          height={!isFavoriteCard ? CardImageSize.Main.Height : CardImageSize.Favorite.Height}
           alt="Place"
         />
       </div>

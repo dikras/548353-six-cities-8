@@ -10,6 +10,7 @@ type MapProps = {
   city: City;
   points: Points;
   selectedPoint?: OfferType | null;
+  currentPoint?: OfferType | null;
 };
 
 const defaultCustomIcon = new Icon({
@@ -25,7 +26,7 @@ const currentCustomIcon = new Icon({
 });
 
 function Map(props: MapProps): JSX.Element {
-  const {city, points, selectedPoint} = props;
+  const {city, points, selectedPoint, currentPoint} = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -53,11 +54,19 @@ function Map(props: MapProps): JSX.Element {
             (selectedPoint?.location.latitude === point.lat &&
               selectedPoint?.location.longitude === point.lng) ? currentCustomIcon : defaultCustomIcon)
           .addTo(markerGroup.current as LayerGroup);
-
-
       });
+
+      if(currentPoint) {
+        const markerCurrentPoint = new Marker({
+          lat: currentPoint.location.latitude,
+          lng: currentPoint.location.longitude,
+        });
+
+        markerCurrentPoint.setIcon(currentCustomIcon).addTo(markerGroup.current as LayerGroup);
+      }
+
     }
-  }, [map, city, points, selectedPoint]);
+  }, [map, city, points, selectedPoint, currentPoint]);
 
   return <div style={{height: '667px'}} ref={mapRef}></div>;
 }

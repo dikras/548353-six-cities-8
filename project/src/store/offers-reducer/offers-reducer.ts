@@ -12,7 +12,7 @@ const initialState: OffersData = {
   isDataLoaded: false,
 };
 
-const offersData = createReducer(initialState, (builder) => {
+const offersReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
@@ -47,4 +47,4 @@ const offersData = createReducer(initialState, (builder) => {
     });
 });
 
-export {offersData};
+export {offersReducer};

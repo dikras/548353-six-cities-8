@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
-import { appProcess } from './app-process/app-process';
-import { offersData } from './offers-data/offers-data';
-import { reviewsProcess } from './reviews-process/reviews-process';
-import { userProcess } from './user-process/user-process';
-import { favoriteOffersData } from './favorites-data/favorites-data';
+import { appReducer } from './app-reducer/app-reducer';
+import { offersReducer } from './offers-reducer/offers-reducer';
+import { reviewsReducer } from './reviews-reducer/reviews-reducer';
+import { userReducer } from './user-reducer/user-reducer';
+import { favoritesReducer } from './favorites-reducer/favorites-reducer';
 
 export enum NameSpace {
   data = 'DATA',
@@ -14,11 +14,11 @@ export enum NameSpace {
 }
 
 export const rootReducer = combineReducers({
-  [NameSpace.app]: appProcess,
-  [NameSpace.data]: offersData,
-  [NameSpace.reviews]: reviewsProcess,
-  [NameSpace.user]: userProcess,
-  [NameSpace.favorites]: favoriteOffersData,
+  [NameSpace.app]: appReducer,
+  [NameSpace.data]: offersReducer,
+  [NameSpace.reviews]: reviewsReducer,
+  [NameSpace.user]: userReducer,
+  [NameSpace.favorites]: favoritesReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

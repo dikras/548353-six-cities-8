@@ -2,16 +2,17 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ReviewStatus, RATING_STARS, CommentLength } from '../../const';
 import { uploadReview } from '../../store/api-actions';
-import { getReviewsStatus } from '../../store/reviews-process/selectors';
+import { getReviewsStatus } from '../../store/reviews-reducer/selectors';
 
 type CommentFormProps = {
   id: string,
 }
 
 function CommentForm(props: CommentFormProps): JSX.Element {
-  const isReviewUploading = useSelector(getReviewsStatus) === ReviewStatus.Uploading;
-  const isReviewUploaded = useSelector(getReviewsStatus) === ReviewStatus.Uploaded;
-  const isReviewNotUploaded = useSelector(getReviewsStatus) === ReviewStatus.NotUploaded;
+  const reviewStatus = useSelector(getReviewsStatus);
+  const isReviewUploading = reviewStatus === ReviewStatus.Uploading;
+  const isReviewUploaded = reviewStatus === ReviewStatus.Uploaded;
+  const isReviewNotUploaded = reviewStatus === ReviewStatus.NotUploaded;
 
   const { id } = props;
 

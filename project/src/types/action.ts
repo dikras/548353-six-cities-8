@@ -1,29 +1,26 @@
 import { Action } from 'redux';
-import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+import { ThunkAction } from 'redux-thunk';
 import { AxiosInstance } from 'axios';
 import { State } from '../types/state';
 
 export enum ActionType {
-  ChangeCity = 'main/changeCity',
-  ChangeSorting = 'main/changeSorting',
-  LoadOffers = 'data/loadOffers',
-  UpdateOffers = 'data/updateOffers',
-  UpdateOffersNear = 'data/updateOfferNear',
-  UpdateOffer = 'data/updateOffer',
+  RedirectToRoute = 'app/redirectToRoute',
+  ChangeCity = 'app/changeCity',
+  ChangeSorting = 'app/changeSorting',
   RequireAuthorization = 'user/requireAuthorization',
   UserLogin = 'user/login',
-  LoadOffer = 'data/loadOffer',
   UserLogout = 'user/logout',
-  RedirectToRoute = 'app/redirectToRoute',
-  LoadReviews = 'data/loadReviews',
-  LoadOffersNear = 'data/loadOffersNear',
-  LoadOfferFull = 'data/loadOfferFull',
-  LoadOfferError = 'data/loadOfferError',
-  PostReview = 'user/postReview',
-  LoadFavoriteOffers = 'data/loadFavoriteOffers',
-  UpdateFavoriteOffers = 'data/updateFavoriteOffers',
+  LoadReviews = 'reviews/loadReviews',
+  PostReview = 'review/postReview',
+  LoadOffers = 'offers/loadOffers',
+  LoadOffersNear = 'offers/loadOffersNear',
+  UpdateOffers = 'offers/updateOffers',
+  UpdateFavoriteOffers = 'favorite-offers/updateFavoriteOffers',
+  LoadFavoriteOffers = 'favorite-offers/loadFavoriteOffers',
+  LoadOffer = 'offer/loadOffer',
+  LoadOfferFull = 'offer/loadOfferFull',
+  LoadOfferError = 'offer/loadOfferError',
+  UpdateOffer = 'offer/updateOffer',
 }
 
 export type ThunkActionResult<R = Promise<void>> = ThunkAction<R, State, AxiosInstance, Action>;
-
-export type ThunkAppDispatch = ThunkDispatch<State, AxiosInstance, Action>;

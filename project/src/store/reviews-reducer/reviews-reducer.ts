@@ -10,7 +10,7 @@ const initialState: ReviewsProcess = {
   isPostReviewError: false,
 };
 
-const reviewsProcess = createReducer(initialState, (builder) => {
+const reviewsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
@@ -21,4 +21,4 @@ const reviewsProcess = createReducer(initialState, (builder) => {
     });
 });
 
-export {reviewsProcess};
+export {reviewsReducer};

@@ -1,8 +1,8 @@
 import Header from '../header/header';
 import { useRef, FormEvent } from 'react';
 import { loginAction } from '../../store/api-actions';
-import { getCurrentCity } from '../../store/app-process/selectors';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getCurrentCity } from '../../store/app-reducer/selectors';
+import { getAuthorizationStatus } from '../../store/user-reducer/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { AuthorizationStatus, AppRoute, CityName } from '../../const';
 import { Redirect } from 'react-router';

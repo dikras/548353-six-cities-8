@@ -8,7 +8,7 @@ const initialState: AppProcess = {
   currentSortingOption: SortingType.Default,
 };
 
-const appProcess = createReducer(initialState, (builder) => {
+const appReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
       state.currentCity = action.payload;
@@ -18,4 +18,4 @@ const appProcess = createReducer(initialState, (builder) => {
     });
 });
 
-export {appProcess};
+export {appReducer};

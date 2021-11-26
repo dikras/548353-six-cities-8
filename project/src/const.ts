@@ -33,13 +33,13 @@ export enum CardType {
 }
 
 export const CardImageSize = {
-  main: {
-    height: '200',
-    width: '260',
+  Main: {
+    Height: '200',
+    Width: '260',
   },
-  favorite: {
-    height: '110',
-    width: '150',
+  Favorite: {
+    Height: '110',
+    Width: '150',
   },
 };
 

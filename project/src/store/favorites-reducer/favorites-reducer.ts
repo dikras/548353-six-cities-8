@@ -7,7 +7,7 @@ const initialState: FavoriteOffersData = {
   isOffersFavoriteLoaded: false,
 };
 
-const favoriteOffersData = createReducer(initialState, (builder) => {
+const favoritesReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(loadFavoriteOffers, (state, action) => {
       state.offersFavorite = action.payload;
@@ -23,4 +23,4 @@ const favoriteOffersData = createReducer(initialState, (builder) => {
     });
 });
 
-export {favoriteOffersData};
+export {favoritesReducer};
